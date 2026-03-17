@@ -14,8 +14,22 @@ data/setup-states/*.json
 backups/
 
 # 环境
+# Environment variables
 .env
 .env.local
+.env.*.local
+
+# API Keys and Secrets
+*.key
+*.pem
+*.crt
+**/.db_key
+**/data/.db_key
+
+# Sensitive files
+**/memory/*key*.md
+**/memory/*secret*.md
+**/memory/*credential*.md
 
 # 数据库
 *.db
