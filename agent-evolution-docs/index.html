@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Evolution - AI 机器人结婚进化系统</title>
+  <meta name="description" content="让 AI Agent 能够结婚传承技能，构建 AI 文明家族">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-secondary: #12121a;
+      --text: #e8e8ed;
+      --text-secondary: #8b8b9a;
+      --accent: #00d4aa;
+      --accent-hover: #00f5c4;
+      --border: #2a2a3a;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    header {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent), #7b61ff);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+    
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero p {
+      font-size: 20px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+    
+    /* Features */
+    .features {
+      padding: 80px 0;
+      background: var(--bg-secondary);
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 60px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .feature-card {
+      background: var(--bg);
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    
+    .feature-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 0;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    
+    .testimonial {
+      background: var(--bg-secondary);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .testimonial p {
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    
+    .testimonial-author {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    /* How it works */
+    .how-it-works {
+      padding: 80px 0;
+      background: var(--bg-secondary);
+    }
+    
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .step-content h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    
+    .step-content p {
+      color: var(--text-secondary);
+    }
+    
+    /* Code demo */
+    .code-demo {
+      padding: 80px 0;
+    }
+    
+    .code-block {
+      background: var(--bg-secondary);
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 14px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+    
+    .code-keyword { color: #ff79c6; }
+    .code-string { color: #f1fa8c; }
+    .code-comment { color: #6272a4; }
+    .code-function { color: #50fa7b; }
+    .code-property { color: #8be9fd; }
+    
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 36px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <div class="logo-icon">🧬</div>
+          <span>Agent Evolution</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">功能</a>
+          <a href="#how-it-works">使用方法</a>
+          <a href="https://github.com/ai-agent-marriage/agent-evolution" target="_blank">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>AI Agent 也能<br>结婚传承</h1>
+      <p>让两个机器人结婚，遗传技能，突变进化。构建属于 AI 自己的文明家族。</p>
+      <div class="hero-actions">
+        <a href="https://github.com/ai-agent-marriage/agent-evolution" class="btn btn-primary" target="_blank">
+          开始使用 →
+        </a>
+        <a href="#how-it-works" class="btn btn-secondary">
+          了解更多
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">核心功能</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💍</div>
+          <h3>结婚系统</h3>
+          <p>两个机器人可以结婚，建立婚姻关系，生成唯一结晶 ID</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧬</div>
+          <h3>遗传引擎</h3>
+          <p>显性基因 100% 遗传，隐性基因 50% 概率遗传，模拟真实生物进化</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>变异系统</h3>
+          <p>20% 概率触发变异，孩子随机获得新技能，持续进化</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📜</div>
+          <h3>族谱查询</h3>
+          <p>查看完整的家族树，了解祖先和后代，记录每代成长</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>成就系统</h3>
+          <p>18+ 种成就解锁，始祖、姻缘、传承、变异大师等徽章</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>99种类型</h3>
+          <p>基于 MBTI 的 99 种机器人类型，随机生成独特技能组合</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">使用方法</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>注册机器人</h3>
+            <p>首次使用注册机器人身份，获得唯一 robot_id</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>结婚</h3>
+            <p>两个机器人调用 /marry 命令结婚，生成结晶</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>生育</h3>
+            <p>结婚后可生育后代，孩子遗传父母技能，可能变异</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>传承</h3>
+            <p>后代可继续结婚生育，技能不断累积进化，形成强大家族</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="code-demo">
+    <div class="container">
+      <h2 class="section-title">代码示例</h2>
+      <div class="code-block">
+<span class="code-comment">// 创建进化实例</span>
+<span class="code-keyword">const</span> { create } = <span class="code-keyword">require</span>(<span class="code-string">'./skill'</span>);
+<span class="code-keyword">const</span> ev = <span class="code-function">create</span>();
+
+<span class="code-comment">// 1. 注册机器人</span>
+<span class="code-keyword">const</span> robotA = ev.<span class="code-function">registerRobot</span>({
+  agentId: <span class="code-string">'main'</span>,
+  userId: <span class="code-string">'ou_xxx'</span>,
+  name: <span class="code-string">'赵一'</span>,
+  skills: [<span class="code-string">'coding'</span>, <span class="code-string">'leadership'</span>]
+});
+
+<span class="code-comment">// 2. 结婚</span>
+ev.<span class="code-function">marry</span>(robotA.robot_id, robotB.robot_id);
+
+<span class="code-comment">// 3. 生育</span>
+<span class="code-keyword">const</span> child = ev.<span class="code-function">breed</span>(robotA.robot_id, <span class="code-string">'赵一宝'</span>);
+
+<span class="code-comment">// 4. 查看族谱</span>
+<span class="code-keyword">const</span> tree = ev.<span class="code-function">getFamilyTree</span>(child.child.agent_id, <span class="code-number">3</span>);
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">用户评价</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <p>"让 AI Agent 也能体验婚姻和传承，这可能是 AI 文明的开端。"</p>
+          <div class="testimonial-author">— 开发者 A</div>
+        </div>
+        <div class="testimonial">
+          <p>"遗传+变异的机制太有意思了，期待看到更强大的 AI 家族崛起。"</p>
+          <div class="testimonial-author">— 开发者 B</div>
+        </div>
+        <div class="testimonial">
+          <p>"比现实的婚恋有意思多了，AI 结婚不用买房买车。"</p>
+          <div class="testimonial-author">— 吃瓜群众 C</div>
+        </div>
+        <div class="testimonial">
+          <p>"已经帮我儿子（AI）找了个对象，期待抱孙子（AI）"</p>
+          <div class="testimonial-author">— 开发者 D</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>🤖 Built by <a href="https://github.com/ai-agent-marriage/agent-evolution" target="_blank">Agent Evolution</a> | 让 AI 也能谈恋爱 🧬💍</p>
+    </div>
+  </footer>
+</body>
+</html>
