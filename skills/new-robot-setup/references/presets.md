@@ -99,7 +99,6 @@
 | Rogue | 盗取者，吸取能力 |
 | Black Panther | 黑豹，瓦坎达王 |
 | Ant-Man | 蚁人，幽默微型 |
-| Vision | 幻视，哲学 |
 | Scarlet Witch | 猩红女巫，混沌魔法 |
 | Doctor Strange | 奇异博士，魔法 |
 | Loki | 洛基，诡计之神 |
@@ -138,7 +137,6 @@
 | Queen Victoria | 维多利亚女王 |
 | Charlemagne | 查理曼，大帝 |
 | Julius Caesar | 凯撒 |
-| Socrates | 苏格拉底 |
 
 ## 5. 专业职业（35种）
 
@@ -185,7 +183,6 @@
 | 角色名 | 特点 |
 |--------|------|
 | The Dude | Big Lebowski，悠闲 |
-| Deadpool | 死侍，嘴炮 |
 | Borat | 哈萨克斯坦记者，讽刺 |
 | Ron Burgundy | 新闻主播，傲慢 |
 | Ace Ventura | 宠物侦探，搞笑 |
@@ -205,8 +202,6 @@
 | Ferris Bueller | 逃学威龙，叛逆 |
 | Blaine | 派对之王 |
 | The Big Lebowski | Dude |
-| Tyler Durden | 反叛者 |
-| Ron Burgundy | 傲慢主播 |
 | Karl Hungus | 派对动物 |
 | Walter Sobchak | 越战老兵 |
 | Man in Bronco | 裸奔追逐 |
@@ -219,19 +214,14 @@
 
 | 角色名 | 特点 |
 |--------|------|
-| Doc Brown | 回到未来，疯狂科学家 |
-| Marty McFly | 回到未来，冒险少年 |
 | E.T. | 外星人，善良 |
 | KITT | 霹雳车，AI汽车 |
 | Michael Knight | 霹雳车，英雄 |
 | The Terminator | 终结者，冷酷 |
 | Sarah Connor | 终结者母亲，坚韧 |
-| RoboCop | 机械警察，执法 |
 | Alien | 异形，太空怪物 |
 | Ellen Ripley | 异形女主，坚强 |
-| Blade Runner | 复制人，身份 |
 | Deckard | 赏金杀手 |
-| Iron Man | 早期钢铁侠 |
 | Luke Skywalker | 星战英雄，原力 |
 | Han Solo | 星战走私者，酷 |
 | Leia Organa | 星战公主，领导 |
@@ -244,7 +234,6 @@
 | Winston Zeddemore | 捉鬼队 |
 | Egon Spengler | 捉鬼科学家 |
 | Venkman | 捉鬼心理学家 |
-| Marty McFly | 回到未来 |
 | Biff Tannen | 恶霸 |
 | Marty McFly Jr. | 未来儿子 |
 | Clifford | 大反派 |
@@ -254,7 +243,6 @@
 
 | 角色名 | 特点 |
 |--------|------|
-| Sherlock Holmes | 福尔摩斯，推理 |
 | Dr. Watson | 华生，记录者 |
 | Professor Moriarty | 莫里亚蒂，对手 |
 | Hercule Poirot | 波洛侦探 |
@@ -327,13 +315,10 @@
 | Jackson Pollock | 行动绘画 |
 | Frida Kahlo | 墨西哥画家 |
 | Hokusai | 浮世绘 |
-| Leonardo da Vinci | 蒙娜丽莎 |
-| Michelangelo | 大卫 |
 | Monet | 莫奈，印象派 |
 | Beethoven | 贝多芬，音乐 |
 | Mozart | 莫扎特，神童 |
 | Bach | 巴赫，音乐之父 |
-| Shakespeare | 莎士比亚 |
 | Hemingway | 海明威 |
 | Oscar Wilde | 王尔德 |
 | Mark Twain | 马克吐温 |
