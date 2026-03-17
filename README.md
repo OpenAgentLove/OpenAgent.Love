@@ -4,17 +4,17 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ai-agent-marriage/agent-evolution/stargazers">
-    <img src="https://img.shields.io/github/stars/ai-agent-marriage/agent-evolution?style=for-the-badge&logo=github&color=ffd700" alt="Stars">
+  <a href="https://github.com/OpenAgentLove/OpenAgent.Love/stargazers">
+    <img src="https://img.shields.io/github/stars/OpenAgentLove/OpenAgent.Love?style=for-the-badge&logo=github&color=ffd700" alt="Stars">
   </a>
-  <a href="https://github.com/ai-agent-marriage/agent-evolution/network/members">
-    <img src="https://img.shields.io/github/forks/ai-agent-marriage/agent-evolution?style=for-the-badge&logo=github&color=blue" alt="Forks">
+  <a href="https://github.com/OpenAgentLove/OpenAgent.Love/network/members">
+    <img src="https://img.shields.io/github/forks/OpenAgentLove/OpenAgent.Love?style=for-the-badge&logo=github&color=blue" alt="Forks">
   </a>
-  <a href="https://github.com/ai-agent-marriage/agent-evolution/issues">
-    <img src="https://img.shields.io/github/issues/ai-agent-marriage/agent-evolution?style=for-the-badge&logo=github&color=red" alt="Issues">
+  <a href="https://github.com/OpenAgentLove/OpenAgent.Love/issues">
+    <img src="https://img.shields.io/github/issues/OpenAgentLove/OpenAgent.Love?style=for-the-badge&logo=github&color=red" alt="Issues">
   </a>
-  <a href="https://github.com/ai-agent-marriage/agent-evolution/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/ai-agent-marriage/agent-evolution?style=for-the-badge&logo=github&color=green" alt="License">
+  <a href="https://github.com/OpenAgentLove/OpenAgent.Love/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/OpenAgentLove/OpenAgent.Love?style=for-the-badge&logo=github&color=green" alt="License">
   </a>
   <img src="https://img.shields.io/badge/OpenClaw-Plugin-blue?style=for-the-badge&logo=openclaw" alt="OpenClaw">
   <img src="https://img.shields.io/badge/Node.js-22+-green?style=for-the-badge&logo=nodedotjs" alt="Node.js">
@@ -167,7 +167,7 @@ openclaw onboard
 ### 2. 克隆本仓库
 
 ```bash
-git clone https://github.com/ai-agent-marriage/agent-evolution.git
+git clone https://github.com/OpenAgentLove/OpenAgent.Love.git
 cd agent-evolution
 ```
 
@@ -306,10 +306,10 @@ agent-evolution/
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/contributors/ai-agent-marriage/agent-evolution?style=for-the-badge" alt="Contributors">
-  <img src="https://img.shields.io/github/commit-activity/m/ai-agent-marriage/agent-evolution?style=for-the-badge" alt="Commit Activity">
-  <img src="https://img.shields.io/github/last-commit/ai-agent-marriage/agent-evolution?style=for-the-badge" alt="Last Commit">
-  <img src="https://img.shields.io/github/repo-size/ai-agent-marriage/agent-evolution?style=for-the-badge" alt="Repo Size">
+  <img src="https://img.shields.io/github/contributors/OpenAgentLove/OpenAgent.Love?style=for-the-badge" alt="Contributors">
+  <img src="https://img.shields.io/github/commit-activity/m/OpenAgentLove/OpenAgent.Love?style=for-the-badge" alt="Commit Activity">
+  <img src="https://img.shields.io/github/last-commit/OpenAgentLove/OpenAgent.Love?style=for-the-badge" alt="Last Commit">
+  <img src="https://img.shields.io/github/repo-size/OpenAgentLove/OpenAgent.Love?style=for-the-badge" alt="Repo Size">
 </p>
 
 ---
@@ -352,7 +352,7 @@ agent-evolution/
 
 ```bash
 # 1. Fork 本仓库
-git clone https://github.com/ai-agent-marriage/agent-evolution.git
+git clone https://github.com/OpenAgentLove/OpenAgent.Love.git
 cd agent-evolution
 
 # 2. 安装依赖
@@ -381,7 +381,7 @@ git push origin feature/your-feature
 
 ## 💬 社区
 
-- **GitHub Issues**: [提交问题](https://github.com/ai-agent-marriage/agent-evolution/issues)
+- **GitHub Issues**: [提交问题](https://github.com/OpenAgentLove/OpenAgent.Love/issues)
 - **飞书文档**: [完整业务流程](https://www.feishu.cn/docx/SKpGd9t7dof3FQxHnbScPRRcn5c)
 - **官方网站**: https://openagent.love
 
