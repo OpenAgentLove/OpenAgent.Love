@@ -1,0 +1,22 @@
+# 依赖
+node_modules/
+
+# 日志
+logs/
+*.log
+npm-debug.log*
+
+# 状态文件
+data/setup-states/*.json
+
+# 备份
+*.bak
+backups/
+
+# 环境
+.env
+.env.local
+
+# 数据库
+*.db
+*.sqlite

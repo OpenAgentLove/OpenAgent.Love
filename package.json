@@ -1,0 +1,25 @@
+{
+  "name": "openagent-love",
+  "version": "2.3.0",
+  "description": "AI Agent Evolution System - Backup, Configuration, Marriage",
+  "scripts": {
+    "audit": "npm audit --audit-level=moderate",
+    "audit:fix": "npm audit fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"Linting...\"",
+    "build": "echo \"Building...\""
+  },
+  "keywords": [
+    "openclaw",
+    "agent",
+    "ai",
+    "evolution",
+    "marriage"
+  ],
+  "author": "OpenAgentLove",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenAgentLove/OpenAgent.Love.git"
+  }
+}

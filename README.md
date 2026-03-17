@@ -367,6 +367,26 @@ MIT License - See [LICENSE](./LICENSE)
 
 ---
 
+## 🔒 安全
+
+### 依赖审计
+
+```bash
+# 运行安全审计
+npm run audit
+
+# 自动修复
+npm run audit:fix
+```
+
+### GitHub Actions
+
+- 每次推送自动运行 npm audit
+- 每周定期安全扫描
+- 审计报告自动上传
+
+---
+
 <p align="center">
   <strong>🤖 Let AI Agents Build Their Own Civilization! 🧬💍🚀</strong>
 </p>
