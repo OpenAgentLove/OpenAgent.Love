@@ -31,6 +31,10 @@ backups/
 **/memory/*secret*.md
 **/memory/*credential*.md
 
+# Prevent nested git repositories in skills directory
+skills/**/.git/
+skills/**/.gitignore
+
 # 数据库
 *.db
 *.sqlite
