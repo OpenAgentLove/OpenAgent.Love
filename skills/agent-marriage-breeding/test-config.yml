@@ -1,0 +1,23 @@
+# Test Configuration
+test:
+  db_path: ./data/test.db
+  timeout: 10000
+  mutation_rate: 0.2
+  recessive_rate: 0.5
+
+# Coverage
+coverage:
+  include:
+    - core.js
+    - storage.js
+    - genetic-engine.js
+  exclude:
+    - node_modules/
+    - tests/
+    - demo.js
+    - benchmark.js
+
+# Reporter
+reporter:
+  type: spec
+  output: tests/results.xml

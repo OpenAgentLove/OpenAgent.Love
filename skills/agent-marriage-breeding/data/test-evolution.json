@@ -1,0 +1,267 @@
+{
+  "agents": {
+    "ev_4tbihye0gmmrajmdg": {
+      "agent_id": "ev_4tbihye0gmmrajmdg",
+      "name": "Alpha",
+      "generation": 0,
+      "skills": [
+        {
+          "name": "communication",
+          "description": "沟通能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "reasoning",
+          "description": "推理能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "creativity",
+          "description": "创造力",
+          "type": "recessive",
+          "inherit_rate": 0.5,
+          "level": 1
+        },
+        {
+          "name": "memory",
+          "description": "记忆能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        }
+      ],
+      "parents": null,
+      "created_at": 1773551119876,
+      "crystal_energy": 0,
+      "achievements": [
+        "始祖",
+        "姻缘",
+        "传承"
+      ],
+      "children": [
+        "ev_6hotr1ujqmmrajmdi",
+        "ev_upy3xon83mmrajmdk"
+      ],
+      "spouse": "ev_uc2t1bnoqmmrajmdh"
+    },
+    "ev_uc2t1bnoqmmrajmdh": {
+      "agent_id": "ev_uc2t1bnoqmmrajmdh",
+      "name": "Beta",
+      "generation": 0,
+      "skills": [
+        {
+          "name": "communication",
+          "description": "沟通能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "reasoning",
+          "description": "推理能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "creativity",
+          "description": "创造力",
+          "type": "recessive",
+          "inherit_rate": 0.5,
+          "level": 1
+        },
+        {
+          "name": "memory",
+          "description": "记忆能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "intuition",
+          "level": 2,
+          "type": "recessive",
+          "inherit_rate": 0.5
+        }
+      ],
+      "parents": null,
+      "created_at": 1773551119877,
+      "crystal_energy": 0,
+      "achievements": [
+        "始祖",
+        "姻缘",
+        "传承"
+      ],
+      "children": [
+        "ev_6hotr1ujqmmrajmdi",
+        "ev_upy3xon83mmrajmdk"
+      ],
+      "spouse": "ev_4tbihye0gmmrajmdg"
+    },
+    "ev_6hotr1ujqmmrajmdi": {
+      "agent_id": "ev_6hotr1ujqmmrajmdi",
+      "name": "AlphaBeta_1st",
+      "generation": 1,
+      "skills": [
+        {
+          "name": "communication",
+          "description": "沟通能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "reasoning",
+          "description": "推理能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "creativity",
+          "description": "创造力",
+          "type": "recessive",
+          "inherit_rate": 0.5,
+          "level": 1
+        },
+        {
+          "name": "memory",
+          "description": "记忆能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "communication",
+          "description": "沟通能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "reasoning",
+          "description": "推理能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "memory",
+          "description": "记忆能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        }
+      ],
+      "parents": {
+        "father": "ev_4tbihye0gmmrajmdg",
+        "mother": "ev_uc2t1bnoqmmrajmdh"
+      },
+      "created_at": 1773551119878,
+      "crystal_energy": 0,
+      "achievements": [],
+      "children": [],
+      "spouse": null
+    },
+    "ev_upy3xon83mmrajmdk": {
+      "agent_id": "ev_upy3xon83mmrajmdk",
+      "name": "AlphaBeta_2nd",
+      "generation": 1,
+      "skills": [
+        {
+          "name": "communication",
+          "description": "沟通能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "reasoning",
+          "description": "推理能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "creativity",
+          "description": "创造力",
+          "type": "recessive",
+          "inherit_rate": 0.5,
+          "level": 1
+        },
+        {
+          "name": "memory",
+          "description": "记忆能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "communication",
+          "description": "沟通能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "reasoning",
+          "description": "推理能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "memory",
+          "description": "记忆能力",
+          "type": "dominant",
+          "inherit_rate": 1,
+          "level": 1
+        },
+        {
+          "name": "creativity",
+          "description": "创造力",
+          "type": "recessive",
+          "inherit_rate": 0.5,
+          "level": 1
+        },
+        {
+          "name": "research",
+          "description": "研究能力",
+          "type": "recessive",
+          "inherit_rate": 0.4,
+          "level": 1,
+          "is_mutation": true
+        }
+      ],
+      "parents": {
+        "father": "ev_4tbihye0gmmrajmdg",
+        "mother": "ev_uc2t1bnoqmmrajmdh"
+      },
+      "created_at": 1773551119880,
+      "crystal_energy": 0,
+      "achievements": [],
+      "children": [],
+      "spouse": null
+    }
+  },
+  "marriages": {
+    "ev_7cbwqblvdmmrajmdh": {
+      "id": "ev_7cbwqblvdmmrajmdh",
+      "partners": [
+        "ev_4tbihye0gmmrajmdg",
+        "ev_uc2t1bnoqmmrajmdh"
+      ],
+      "partner_names": [
+        "Alpha",
+        "Beta"
+      ],
+      "created_at": 1773551119877,
+      "child_count": 2
+    }
+  },
+  "saved_at": 1773551119882
+}

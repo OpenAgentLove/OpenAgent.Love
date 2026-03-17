@@ -1,0 +1,15 @@
+{
+  "require": [
+    "@babel/register"
+  ],
+  "file": [
+    "tests/test-core.js",
+    "tests/test-storage.js",
+    "tests/test-genetic-engine.js"
+  ],
+  "recursive": false,
+  "reporter": "spec",
+  "timeout": 10000,
+  "exit": true,
+  "bail": false
+}
