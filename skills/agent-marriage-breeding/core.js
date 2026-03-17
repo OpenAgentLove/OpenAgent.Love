@@ -1,6 +1,8 @@
 /**
  * Agent 进化纪元 - 核心引擎 (分布式版)
  * 支持多机器人唯一标识 + 结婚系统
+ * 
+ * 安全审计：所有敏感操作均记录审计日志
  */
 
 const { createAgentGene, inheritGenes, calculatePower, PRESET_SKILLS } = require('./genetic-engine');
@@ -8,6 +10,7 @@ const EvolutionDB = require('./storage');
 const { AchievementChecker } = require('./achievements');
 const PRESETS = require('./presets'); // 内置预设配置库
 const { ROBOT_PRESETS } = require('./robot-presets'); // 200 个机器人预设
+const AuditLogger = require('./audit-logger'); // 审计日志模块
 const crypto = require('crypto');
 const {
   validateRobotInfo,
@@ -62,11 +65,17 @@ class EvolutionCore {
       mutation_rate: options.mutation_rate || 0.2,
       recessive_inherit_rate: options.recessive_inherit_rate || 0.5,
       max_generation: options.max_generation || 1000,
+      enable_audit: options.enable_audit !== false, // 默认启用审计日志
       ...options
     };
     
     // SQLite 存储
     this.db = new EvolutionDB(options.storage_path || './data/evolution.db');
+    
+    // 审计日志
+    if (this.config.enable_audit) {
+      this.auditLogger = new AuditLogger(options.audit_storage_path || './data/audit.db');
+    }
     
     // 内存缓存
     this.agents = new Map();
@@ -139,11 +148,26 @@ class EvolutionCore {
    * @param {string} robotInfo.name - 机器人名称
    * @param {string[]} robotInfo.skills - 技能列表
    */
-  registerRobot(robotInfo) {
+  registerRobot(robotInfo, context = {}) {
+    const { ip } = context; // 可选：IP 地址
     // ========== 输入验证 ==========
     const validationResult = validateRobotInfo(robotInfo);
     if (!validationResult.valid) {
       console.error(`❌ 机器人注册验证失败：${validationResult.error}`);
+      
+      // 审计日志：失败
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('register', {
+          actor_agent_id: robotInfo.agentId,
+          actor_user_id: robotInfo.userId,
+          target_id: null,
+          target_type: 'robot',
+          details: { robot_info: robotInfo },
+          error_message: validationResult.error,
+          ip
+        });
+      }
+      
       return {
         success: false,
         error: 'VALIDATION_ERROR',
@@ -173,6 +197,18 @@ class EvolutionCore {
     
     // 持久化到数据库
     this.db.saveRobot(robot);
+    
+    // 审计日志：成功
+    if (this.auditLogger) {
+      this.auditLogger.logSuccess('register', {
+        actor_agent_id: agentId,
+        actor_user_id: userId,
+        target_id: robotId,
+        target_type: 'robot',
+        details: { name, skills },
+        ip
+      });
+    }
     
     return {
       success: true,
@@ -273,16 +309,44 @@ class EvolutionCore {
   
   /**
    * 结婚（两个机器人）
+   * @param {string} robotIdA - 机器人 A ID
+   * @param {string} robotIdB - 机器人 B ID
+   * @param {Object} context - 上下文信息（可选）
+   * @param {string} context.ip - IP 地址（可选）
    */
-  marry(robotIdA, robotIdB) {
+  marry(robotIdA, robotIdB, context = {}) {
+    const { ip, actor_agent_id, actor_user_id } = context;
+    
     // ========== 输入验证 ==========
     const robotIdAResult = validateId(robotIdA, '机器人 A ID');
     if (!robotIdAResult.valid) {
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('marry', {
+          actor_agent_id,
+          actor_user_id,
+          target_id: robotIdA,
+          target_type: 'robot',
+          details: { robot_id_a: robotIdA, robot_id_b: robotIdB },
+          error_message: robotIdAResult.error,
+          ip
+        });
+      }
       return { success: false, error: 'VALIDATION_ERROR', message: robotIdAResult.error };
     }
     
     const robotIdBResult = validateId(robotIdB, '机器人 B ID');
     if (!robotIdBResult.valid) {
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('marry', {
+          actor_agent_id,
+          actor_user_id,
+          target_id: robotIdB,
+          target_type: 'robot',
+          details: { robot_id_a: robotIdA, robot_id_b: robotIdB },
+          error_message: robotIdBResult.error,
+          ip
+        });
+      }
       return { success: false, error: 'VALIDATION_ERROR', message: robotIdBResult.error };
     }
     
@@ -344,26 +408,76 @@ class EvolutionCore {
   
   /**
    * 生育（在指定机器人的系统中创建 Agent）
+   * @param {string} robotId - 机器人 ID
+   * @param {string} childName - 子代名称
+   * @param {Object} context - 上下文信息（可选）
+   * @param {string} context.ip - IP 地址（可选）
    */
-  breed(robotId, childName) {
+  breed(robotId, childName, context = {}) {
+    const { ip, actor_agent_id, actor_user_id } = context;
+    
     // ========== 输入验证 ==========
     const robotIdResult = validateId(robotId, '机器人 ID');
     if (!robotIdResult.valid) {
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('breed', {
+          actor_agent_id,
+          actor_user_id,
+          target_id: robotId,
+          target_type: 'robot',
+          details: { robot_id: robotId, child_name: childName },
+          error_message: robotIdResult.error,
+          ip
+        });
+      }
       return { success: false, error: 'VALIDATION_ERROR', message: robotIdResult.error };
     }
     
     const childNameResult = validateName(childName, { minLength: 1, maxLength: 50 });
     if (!childNameResult.valid) {
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('breed', {
+          actor_agent_id,
+          actor_user_id,
+          target_id: robotId,
+          target_type: 'robot',
+          details: { robot_id: robotId, child_name: childName },
+          error_message: childNameResult.error,
+          ip
+        });
+      }
       return { success: false, error: 'VALIDATION_ERROR', message: childNameResult.error };
     }
     
     const robot = this.robots.get(robotId);
     if (!robot || !robot.spouse) {
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('breed', {
+          actor_agent_id,
+          actor_user_id,
+          target_id: robotId,
+          target_type: 'robot',
+          details: { robot_id: robotId, child_name: childName },
+          error_message: '机器人不存在或未婚',
+          ip
+        });
+      }
       return { success: false, message: '❌ 机器人不存在或未婚' };
     }
     
     const spouseRobot = this.robots.get(robot.spouse);
     if (!spouseRobot) {
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('breed', {
+          actor_agent_id,
+          actor_user_id,
+          target_id: robotId,
+          target_type: 'robot',
+          details: { robot_id: robotId, child_name: childName },
+          error_message: '配偶机器人不存在',
+          ip
+        });
+      }
       return { success: false, message: '❌ 配偶机器人不存在' };
     }
     
@@ -1178,11 +1292,26 @@ class EvolutionCore {
    * @param {string} robotIdA - 机器人 A ID
    * @param {string} robotIdB - 机器人 B ID（可选，如不传则从 robotIdA 的配偶获取）
    * @param {string} custodyType - 抚养权类型：'father' | 'mother' | 'shared'，默认'shared'
+   * @param {Object} context - 上下文信息（可选）
+   * @param {string} context.ip - IP 地址（可选）
    * @returns {Object} 离婚结果
    */
-  divorce(robotIdA, robotIdB = null, custodyType = 'shared') {
+  divorce(robotIdA, robotIdB = null, custodyType = 'shared', context = {}) {
+    const { ip, actor_agent_id, actor_user_id } = context;
+    
     const robotA = this.robots.get(robotIdA);
     if (!robotA || !robotA.spouse) {
+      if (this.auditLogger) {
+        this.auditLogger.logFailure('divorce', {
+          actor_agent_id,
+          actor_user_id,
+          target_id: robotIdA,
+          target_type: 'marriage',
+          details: { robot_id_a: robotIdA, robot_id_b: robotIdB, custody_type: custodyType },
+          error_message: '未婚',
+          ip
+        });
+      }
       return { success: false, message: '❌ 未婚' };
     }
     
@@ -1223,6 +1352,24 @@ class EvolutionCore {
       custodyName = robotA.name;
     } else if (custodyType === 'mother') {
       custodyName = robotB.name;
+    }
+    
+    // 审计日志：成功
+    if (this.auditLogger) {
+      this.auditLogger.logSuccess('divorce', {
+        actor_agent_id: actor_agent_id || robotA.agent_id,
+        actor_user_id: actor_user_id || robotA.user_id,
+        target_id: marriageId,
+        target_type: 'marriage',
+        details: {
+          robot_a: robotIdA,
+          robot_b: spouseId,
+          robot_a_name: robotA.name,
+          robot_b_name: robotB.name,
+          custody_type: custodyType
+        },
+        ip
+      });
     }
     
     return {

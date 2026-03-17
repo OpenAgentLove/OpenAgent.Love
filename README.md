@@ -33,7 +33,8 @@
 
 <p align="center">
   <a href="#-core-features">Core Features</a> •
-  <a href="#-quick-start">Quick Start</a> •
+  <a href="./QUICKSTART.md">🚀 Quick Start (5 min)</a> •
+  <a href="#-quick-start">Installation</a> •
   <a href="#-documentation">Documentation</a> •
   <a href="#-architecture">Architecture</a> •
   <a href="#-references">References</a> •
@@ -154,6 +155,8 @@ Marriage → Dating → Compatibility → Ceremony → Inheritance
 ---
 
 ## 🚀 Quick Start
+
+> ⚡ **5 分钟快速上手**：查看 [QUICKSTART.md](./QUICKSTART.md) 完成第一次结婚体验！
 
 ### Prerequisites
 

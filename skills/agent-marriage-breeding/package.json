@@ -1,5 +1,11 @@
 {
   "dependencies": {
-    "better-sqlite3": "^12.8.0"
+    "better-sqlite3-multiple-ciphers": "^12.6.2"
+  },
+  "scripts": {
+    "generate-key": "node scripts/generate-key.js",
+    "migrate-encryption": "node scripts/migrate-encryption.js",
+    "check-encryption": "node scripts/migrate-encryption.js --check",
+    "test-encryption": "node scripts/test-encryption.js"
   }
 }

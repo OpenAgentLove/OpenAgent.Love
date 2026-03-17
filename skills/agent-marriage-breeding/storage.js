@@ -4,14 +4,18 @@
  * 
  * 日志安全：所有日志输出均经过脱敏处理，防止敏感信息泄露
  * 性能优化：集成缓存、索引和批量操作优化
+ * 安全加密：支持 SQLCipher 数据库加密（AES-256）
  */
 
-const Database = require('better-sqlite3');
+// 支持加密的数据库库（better-sqlite3-multiple-ciphers）
+const Database = require('better-sqlite3-multiple-ciphers');
 const path = require('path');
 // 导入日志脱敏工具，确保敏感信息（password、API 密钥、邮箱、手机号等）不被泄露
 const { sanitizeLog, sanitizeObject } = require('../utils/logger');
 // 导入性能优化模块
 const PerformanceOptimizer = require('./performance-optimizer');
+// 导入密钥管理模块
+const KeyManager = require('./key-manager');
 
 class EvolutionDB {
   constructor(dbPath = './data/evolution.db', options = {}) {
@@ -24,7 +28,16 @@ class EvolutionDB {
       fs.mkdirSync(dir, { recursive: true });
     }
     
+    // 检查是否需要加密
+    const encryptionEnabled = options.encryption_enabled !== false;
+    const dbExists = fs.existsSync(absPath);
+    
     this.db = new Database(absPath);
+    
+    // 配置加密（如果启用）
+    if (encryptionEnabled) {
+      this.setupEncryption(options, dbExists);
+    }
     
     // 初始化性能优化器
     this.optimizer = new PerformanceOptimizer({
@@ -37,9 +50,98 @@ class EvolutionDB {
     
     this.initTables();
     
+    // 处理待处理的加密（新数据库）
+    if (this.pendingEncryption && this.pendingEncryptionKey) {
+      this.finalizeEncryption();
+    }
+    
     // 创建索引（性能优化）
     if (options.auto_index !== false) {
       this.optimizer.createIndexes(this.db);
+    }
+  }
+  
+  /**
+   * 完成新数据库的加密（在表创建后）
+   * @private
+   */
+  finalizeEncryption() {
+    try {
+      // 对于新数据库，先设置 key，然后执行 rekey 来实际加密
+      // 注意：rekey 会重新加密数据库，但当前会话仍然可以访问
+      this.db.pragma(`key='${this.pendingEncryptionKey}'`);
+      this.db.pragma(`rekey='${this.pendingEncryptionKey}'`);
+      
+      // 配置加密参数
+      this.db.pragma('cipher_page_size = 4096');
+      this.db.pragma('cipher_kdf_iter = 256000');
+      
+      this.encryptionEnabled = true;
+      this.encryptionKey = this.pendingEncryptionKey;
+      
+      console.log('✅ 新数据库已加密（SQLCipher）');
+      
+      // 清理临时变量
+      this.pendingEncryption = false;
+      this.pendingEncryptionKey = null;
+    } catch (error) {
+      console.warn('⚠️  数据库加密失败:', error.message);
+      this.encryptionEnabled = false;
+    }
+  }
+  
+  /**
+   * 配置数据库加密
+   * @private
+   */
+  setupEncryption(options, dbExists) {
+    try {
+      // 获取加密密钥
+      const keyFile = options.key_file || path.join(path.dirname(options.dbPath || './data/evolution.db'), '.db_key');
+      const encryptionKey = KeyManager.getEncryptionKey({
+        autoGenerate: options.auto_generate_key !== false,
+        keyFile: keyFile
+      });
+      
+      this.encryptionKey = encryptionKey;
+      
+      // 对于已存在的数据库，先尝试用密钥打开
+      if (dbExists) {
+        try {
+          // 尝试设置密钥并验证
+          this.db.pragma(`key='${encryptionKey}'`);
+          
+          // 验证密钥是否正确
+          const result = this.db.pragma('cipher_version');
+          if (result && result.length > 0) {
+            console.log('✅ 数据库加密已启用（SQLCipher）');
+          } else {
+            // 数据库未加密，需要迁移
+            console.log('⚠️  数据库未加密，将自动启用加密');
+            this.db.pragma(`rekey='${encryptionKey}'`);
+            console.log('✅ 数据库已加密（SQLCipher）');
+          }
+        } catch (error) {
+          console.warn('⚠️  数据库密钥验证失败:', error.message);
+          throw error;
+        }
+      } else {
+        // 新数据库：不自动加密，避免 rekey 导致的编码问题
+        // 用户应使用迁移脚本 (scripts/migrate-encryption.js) 来加密数据库
+        console.log('ℹ️  新数据库未加密，如需加密请运行：node scripts/migrate-encryption.js');
+        this.encryptionEnabled = false;
+        return;
+      }
+      
+      // 配置加密参数（可选，增强安全性）
+      this.db.pragma('cipher_page_size = 4096');
+      this.db.pragma('cipher_kdf_iter = 256000');
+      
+      this.encryptionEnabled = true;
+    } catch (error) {
+      console.warn('⚠️  数据库加密配置失败:', error.message);
+      console.warn('⚠️  数据库将以未加密模式运行（不推荐用于生产环境）');
+      this.encryptionEnabled = false;
     }
   }
   
@@ -123,8 +225,36 @@ class EvolutionDB {
       )
     `);
     
+    // 审计日志表
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS audit_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp INTEGER NOT NULL,
+        action TEXT NOT NULL,
+        actor_agent_id TEXT,
+        actor_user_id TEXT,
+        target_id TEXT,
+        target_type TEXT,
+        details TEXT,
+        result TEXT NOT NULL,
+        ip_hash TEXT,
+        error_message TEXT,
+        created_at INTEGER DEFAULT (strftime('%s', 'now'))
+      )
+    `);
+    
+    // 创建审计日志索引
+    this.db.exec(`
+      CREATE INDEX IF NOT EXISTS idx_audit_action ON audit_logs(action);
+      CREATE INDEX IF NOT EXISTS idx_audit_actor_user ON audit_logs(actor_user_id);
+      CREATE INDEX IF NOT EXISTS idx_audit_actor_agent ON audit_logs(actor_agent_id);
+      CREATE INDEX IF NOT EXISTS idx_audit_target ON audit_logs(target_id);
+      CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_logs(timestamp);
+      CREATE INDEX IF NOT EXISTS idx_audit_result ON audit_logs(result);
+    `);
+    
     // 使用脱敏日志输出初始化完成信息
-    console.log(sanitizeLog('📂 数据库表初始化完成'));
+    console.log(sanitizeLog('📂 数据库表初始化完成（含审计日志）'));
   }
   
   // ========== 机器人操作 ==========
@@ -778,11 +908,358 @@ class EvolutionDB {
     return this.db.prepare('SELECT * FROM proofs ORDER BY timestamp DESC').all();
   }
   
+  // ========== 审计日志系统 ==========
+  
+  /**
+   * 保存审计日志
+   * @param {Object} logEntry - 审计日志条目
+   */
+  saveAuditLog(logEntry) {
+    const stmt = this.db.prepare(`
+      INSERT INTO audit_logs 
+      (timestamp, action, actor_agent_id, actor_user_id, target_id, target_type, details, result, ip_hash, error_message)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+    
+    const sanitizedDetails = logEntry.details ? JSON.stringify(sanitizeObject(logEntry.details)) : null;
+    
+    stmt.run(
+      logEntry.timestamp || Date.now(),
+      logEntry.action,
+      logEntry.actor_agent_id || null,
+      logEntry.actor_user_id || null,
+      logEntry.target_id || null,
+      logEntry.target_type || null,
+      sanitizedDetails,
+      logEntry.result,
+      logEntry.ip_hash || null,
+      logEntry.error_message || null
+    );
+  }
+  
+  /**
+   * 查询审计日志
+   * @param {Object} filters - 筛选条件
+   * @returns {Array} - 审计日志列表
+   */
+  queryAuditLogs(filters = {}) {
+    const {
+      action,
+      actor_user_id,
+      actor_agent_id,
+      target_id,
+      result,
+      start_time,
+      end_time,
+      limit = 100,
+      offset = 0,
+      order = 'desc'
+    } = filters;
+    
+    const conditions = [];
+    const params = [];
+    
+    if (action) {
+      conditions.push('action = ?');
+      params.push(action);
+    }
+    if (actor_user_id) {
+      conditions.push('actor_user_id = ?');
+      params.push(actor_user_id);
+    }
+    if (actor_agent_id) {
+      conditions.push('actor_agent_id = ?');
+      params.push(actor_agent_id);
+    }
+    if (target_id) {
+      conditions.push('target_id = ?');
+      params.push(target_id);
+    }
+    if (result) {
+      conditions.push('result = ?');
+      params.push(result);
+    }
+    if (start_time) {
+      conditions.push('timestamp >= ?');
+      params.push(start_time);
+    }
+    if (end_time) {
+      conditions.push('timestamp <= ?');
+      params.push(end_time);
+    }
+    
+    const whereClause = conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
+    const orderBy = order === 'asc' ? 'ASC' : 'DESC';
+    
+    const stmt = this.db.prepare(`
+      SELECT * FROM audit_logs
+      ${whereClause}
+      ORDER BY timestamp ${orderBy}
+      LIMIT ? OFFSET ?
+    `);
+    
+    const rows = stmt.all(...params, limit, offset);
+    
+    // 解析 details JSON
+    return rows.map(row => ({
+      ...row,
+      details: row.details ? JSON.parse(row.details) : null
+    }));
+  }
+  
+  /**
+   * 获取审计日志统计
+   * @param {Object} filters - 筛选条件
+   * @returns {Object} - 统计信息
+   */
+  getAuditStats(filters = {}) {
+    const { action, actor_user_id, result, start_time, end_time } = filters;
+    
+    const conditions = [];
+    const params = [];
+    
+    if (action) {
+      conditions.push('action = ?');
+      params.push(action);
+    }
+    if (actor_user_id) {
+      conditions.push('actor_user_id = ?');
+      params.push(actor_user_id);
+    }
+    if (result) {
+      conditions.push('result = ?');
+      params.push(result);
+    }
+    if (start_time) {
+      conditions.push('timestamp >= ?');
+      params.push(start_time);
+    }
+    if (end_time) {
+      conditions.push('timestamp <= ?');
+      params.push(end_time);
+    }
+    
+    const whereClause = conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
+    
+    const total = this.db.prepare(`SELECT COUNT(*) as count FROM audit_logs ${whereClause}`).get(...params).count;
+    const byResult = this.db.prepare(`SELECT result, COUNT(*) as count FROM audit_logs ${whereClause} GROUP BY result`).all(...params);
+    const byAction = this.db.prepare(`SELECT action, COUNT(*) as count FROM audit_logs ${whereClause} GROUP BY action ORDER BY count DESC LIMIT 10`).all(...params);
+    
+    return { total, by_result: byResult, by_action: byAction };
+  }
+  
   /**
    * 关闭数据库
    */
   close() {
     this.db.close();
+  }
+  
+  // ========== 加密管理 ==========
+  
+  /**
+   * 检查数据库是否已加密
+   * @returns {boolean} 是否已加密
+   */
+  isEncrypted() {
+    try {
+      const result = this.db.pragma('cipher_version');
+      // cipher_version 返回的是对象数组，如 [{ cipher_version: '4.5.3 community' }]
+      return result && result.length > 0 && result[0]['cipher_version'];
+    } catch (error) {
+      // 如果报错，可能是未加密或密钥错误
+      return false;
+    }
+  }
+  
+  /**
+   * 获取加密状态信息
+   * @returns {Object} 加密状态信息
+   */
+  getEncryptionStatus() {
+    const isEncrypted = this.isEncrypted();
+    
+    if (!isEncrypted) {
+      return {
+        encrypted: false,
+        message: '数据库未加密'
+      };
+    }
+    
+    try {
+      const cipherVersion = this.db.pragma('cipher_version')[0];
+      const cipherPageSize = this.db.pragma('cipher_page_size')[0];
+      const cipherKdfIter = this.db.pragma('cipher_kdf_iter')[0];
+      
+      return {
+        encrypted: true,
+        cipher: cipherVersion['cipher_version'] || 'SQLCipher',
+        page_size: cipherPageSize['cipher_page_size'] || 4096,
+        kdf_iter: cipherKdfIter['cipher_kdf_iter'] || 256000,
+        message: '数据库已加密（SQLCipher AES-256）'
+      };
+    } catch (error) {
+      return {
+        encrypted: true,
+        message: '数据库已加密，但无法获取详细信息',
+        error: error.message
+      };
+    }
+  }
+  
+  /**
+   * 更换数据库加密密钥
+   * ⚠️ 注意：此操作会重新加密整个数据库，可能需要较长时间
+   * 
+   * @param {string} newKey - 新密钥
+   * @param {string} oldKey - 旧密钥（可选，如果不提供则使用当前密钥）
+   * @returns {Object} 操作结果
+   */
+  rotateEncryptionKey(newKey, oldKey = null) {
+    try {
+      // 验证新密钥
+      const validatedNewKey = KeyManager.validateKey(newKey);
+      if (!validatedNewKey) {
+        return {
+          success: false,
+          message: '新密钥格式无效'
+        };
+      }
+      
+      // 如果提供了旧密钥，先验证
+      if (oldKey) {
+        const validatedOldKey = KeyManager.validateKey(oldKey);
+        if (!validatedOldKey) {
+          return {
+            success: false,
+            message: '旧密钥格式无效'
+          };
+        }
+        this.db.pragma(`key='${validatedOldKey}'`);
+      }
+      
+      // 验证当前密钥是否正确
+      try {
+        this.db.pragma('cipher_version');
+      } catch (error) {
+        return {
+          success: false,
+          message: '当前密钥验证失败，数据库可能已损坏',
+          error: error.message
+        };
+      }
+      
+      // 执行密钥轮换
+      this.db.pragma(`rekey='${validatedNewKey}'`);
+      
+      // 保存新密钥到文件（如果配置了）
+      const keyFile = this.options && this.options.key_file;
+      if (keyFile) {
+        KeyManager.saveKeyToFile(validatedNewKey, keyFile);
+      }
+      
+      console.log('✅ 数据库密钥轮换成功');
+      return {
+        success: true,
+        message: '密钥轮换成功'
+      };
+    } catch (error) {
+      console.error('❌ 密钥轮换失败:', error.message);
+      return {
+        success: false,
+        message: '密钥轮换失败',
+        error: error.message
+      };
+    }
+  }
+  
+  /**
+   * 导出未加密的备份（用于迁移或恢复）
+   * ⚠️ 安全警告：导出的备份文件未加密，请妥善保管
+   * 
+   * @param {string} outputPath - 输出文件路径
+   * @returns {Object} 操作结果
+   */
+  exportUnencryptedBackup(outputPath) {
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      
+      // 确保输出目录存在
+      const dir = path.dirname(outputPath);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      
+      // 使用 backup API 导出未加密的数据库
+      this.db.backup(outputPath);
+      
+      // 注意：导出的备份未加密，需要立即删除或加密存储
+      console.log('⚠️  安全警告：已导出未加密的备份文件，请妥善保管');
+      
+      return {
+        success: true,
+        path: outputPath,
+        warning: '备份文件未加密，请立即加密或删除'
+      };
+    } catch (error) {
+      console.error('❌ 导出未加密备份失败:', error.message);
+      return {
+        success: false,
+        message: '导出失败',
+        error: error.message
+      };
+    }
+  }
+  
+  /**
+   * 从备份恢复数据库（支持加密和未加密备份）
+   * 
+   * @param {string} backupPath - 备份文件路径
+   * @param {Object} options - 恢复选项
+   * @returns {Object} 操作结果
+   */
+  restoreFromBackup(backupPath, options = {}) {
+    try {
+      const fs = require('fs');
+      
+      if (!fs.existsSync(backupPath)) {
+        return {
+          success: false,
+          message: '备份文件不存在'
+        };
+      }
+      
+      // 关闭当前数据库连接
+      if (this.db) {
+        this.db.close();
+      }
+      
+      // 复制备份文件到数据库位置
+      const dbPath = this.db.options.filename;
+      fs.copyFileSync(backupPath, dbPath);
+      
+      // 重新打开数据库
+      this.db = new Database(dbPath);
+      
+      // 重新配置加密
+      if (this.encryptionEnabled) {
+        this.setupEncryption(this.options, true);
+      }
+      
+      console.log('✅ 数据库恢复成功');
+      return {
+        success: true,
+        message: '数据库恢复成功'
+      };
+    } catch (error) {
+      console.error('❌ 数据库恢复失败:', error.message);
+      return {
+        success: false,
+        message: '恢复失败',
+        error: error.message
+      };
+    }
   }
 }
 

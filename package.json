@@ -5,9 +5,18 @@
   "scripts": {
     "audit": "npm audit --audit-level=moderate",
     "audit:fix": "npm audit fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "echo \"Linting...\"",
-    "build": "echo \"Building...\""
+    "test": "cd skills/agent-marriage-breeding && ./run-tests.sh",
+    "test:coverage": "cd skills/agent-marriage-breeding && ./run-tests.sh --coverage",
+    "test:watch": "cd skills/agent-marriage-breeding && ./run-tests.sh --watch",
+    "lint": "eslint skills/agent-marriage-breeding/**/*.js",
+    "lint:fix": "eslint skills/agent-marriage-breeding/**/*.js --fix",
+    "build": "echo \"Building...\"",
+    "docker:build": "docker build -t openagent-love .",
+    "docker:run": "docker-compose up -d",
+    
+    "db:generate-key": "cd skills/agent-marriage-breeding && node scripts/generate-key.js",
+    "db:migrate-encryption": "cd skills/agent-marriage-breeding && node scripts/migrate-encryption.js",
+    "db:check-encryption": "cd skills/agent-marriage-breeding && node scripts/migrate-encryption.js --check"
   },
   "keywords": [
     "openclaw",
@@ -21,5 +30,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/OpenAgentLove/OpenAgent.Love.git"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.7",
+    "eslint": "^8.56.0",
+    "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.2.2"
   }
 }

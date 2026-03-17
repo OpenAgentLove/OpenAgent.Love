@@ -1,0 +1,63 @@
+{
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "es2021": true,
+    "mocha": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-console": "off",
+    "no-debugger": "warn",
+    
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "error",
+    
+    "no-shadow": "warn",
+    "no-use-before-define": ["error", { "functions": false }],
+    "no-unused-expressions": "error",
+    "no-undef": "error",
+    
+    "space-before-function-paren": ["error", "always"],
+    "space-in-parens": ["error", "never"],
+    "space-infix-ops": "error",
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    
+    "max-len": ["warn", { "code": 120, "ignoreComments": true, "ignoreUrls": true }],
+    "max-lines-per-function": ["warn", { "max": 100 }],
+    "complexity": ["warn", { "max": 15 }],
+    
+    "valid-jsdoc": ["warn", {
+      "requireReturn": false,
+      "requireReturnType": true,
+      "requireParamDescription": true,
+      "requireReturnDescription": false
+    }],
+    "require-jsdoc": ["warn", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": true
+      }
+    }]
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "data/",
+    "tests/results.xml",
+    "*.min.js"
+  ]
+}
