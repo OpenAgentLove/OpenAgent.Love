@@ -1,6 +1,13 @@
 <p align="center">
   <h1 align="center">🤖 Agent Evolution</h1>
   <p align="center">AI 机器人备份迁移 · 新生配置 · 结婚进化系统</p>
+
+<p align="center">
+  <a href="#">中文</a> •
+  <a href="./README_EN.md">English</a> •
+  <a href="./README_FR.md">Français</a> •
+  <a href="./README_JA.md">日本語</a>
+</p>
 </p>
 
 <p align="center">
@@ -195,9 +202,7 @@ openclaw status
 
 ## 📖 使用文档
 
-### 飞书文档（推荐）
 
-📋 **[Agent Evolution 完整业务流程](https://www.feishu.cn/docx/SKpGd9t7dof3FQxHnbScPRRcn5c)**
 
 包含：
 - ✅ 2.1 备份迁移 - 3 种方案详细步骤
@@ -323,7 +328,6 @@ agent-evolution/
 - ✅ **2.2 新生配置系统** - 8 步骤 + 297 人格预设库
 - ✅ **2.3 结婚进化系统** - 13 步骤完整流程
 - ✅ **SQLite 持久化** - 数据永久保存
-- ✅ **飞书文档** - 完整业务流程整理
 
 **技术改进**：
 - 🚀 优化基因遗传算法
@@ -382,7 +386,6 @@ git push origin feature/your-feature
 ## 💬 社区
 
 - **GitHub Issues**: [提交问题](https://github.com/OpenAgentLove/OpenAgent.Love/issues)
-- **飞书文档**: [完整业务流程](https://www.feishu.cn/docx/SKpGd9t7dof3FQxHnbScPRRcn5c)
 - **官方网站**: https://openagent.love
 
 ---
