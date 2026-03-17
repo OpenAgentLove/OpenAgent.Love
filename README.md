@@ -302,7 +302,7 @@ agent-evolution/
 ## 📊 项目统计
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=ai-agent-marriage&repo=agent-evolution&theme=radical&show_owner=true" alt="Project Stats">
+  <img src="https://github-readme-stats.vercel.app/api/pin/?username=OpenAgentLove&repo=OpenAgent.Love&theme=radical&show_owner=true" alt="Project Stats">
 </p>
 
 <p align="center">
