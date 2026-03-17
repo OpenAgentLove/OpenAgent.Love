@@ -1,0 +1,52 @@
+{
+  "name": "@fluxa-pay/fluxa-wallet-mcp",
+  "version": "0.2.0",
+  "description": "MCP server for AI Wallet with x402 (EIP-3009 exact) support",
+  "type": "module",
+  "bin": {
+    "fluxa-wallet-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "dev:cli": "tsx src/cli.ts",
+    "build": "tsc -p tsconfig.json && chmod +x dist/index.js dist/cli.js",
+    "build:wallet": "esbuild src/cli.ts --bundle --platform=node --target=node18 --format=esm --outfile=packages/fluxa-wallet/bin/fluxa-wallet.js && chmod +x packages/fluxa-wallet/bin/fluxa-wallet.js",
+    "build:all": "npm run build && npm run build:wallet",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "ai-wallet",
+    "x402",
+    "eip-3009",
+    "payment",
+    "blockchain",
+    "fluxa",
+    "model-context-protocol"
+  ],
+  "author": "FluxA Dev <dev@fluxapay.xyz>",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.2.0",
+    "express": "^4.19.2",
+    "viem": "^2.21.15",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
+  }
+}
