@@ -1,0 +1,32 @@
+{
+  "name": "new-robot-setup",
+  "version": "1.0.0",
+  "description": "新生机器人一键配置系统 - 8 步完成机器人配置",
+  "author": "OpenAgentLove",
+  "license": "MIT",
+  "keywords": [
+    "openclaw",
+    "robot",
+    "configuration",
+    "setup",
+    "agent"
+  ],
+  "main": "skill.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "openclaw": {
+    "minVersion": "2026.3.8",
+    "platforms": [
+      "feishu",
+      "discord",
+      "telegram"
+    ],
+    "commands": [
+      "/new-robot",
+      "/setup-robot",
+      "/create-agent"
+    ]
+  }
+}
