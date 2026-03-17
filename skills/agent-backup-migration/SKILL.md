@@ -73,17 +73,37 @@ description: >
    执行以下命令：
    ```bash
    # 假设源机器人为 agent:main:feishu:xxx，目标机器人为 agent:main:feishu:yyy
-   # 1. 复制工作区
-   cp -r ~/.openclaw/workspace1 ~/.openclaw/workspace_xxx_backup
    
-   # 2. 复制配置文件
-   # 需要根据实际情况复制对应的配置文件
+   # 1. 获取当前机器人列表，确定源和目标
+   openclaw list
    
-   # 3. 复制技能
-   # skill目录通常在 ~/.openclaw/extensions/ 或 skill目录
+   # 2. 创建目标机器人的空目录
+   mkdir -p ~/.openclaw/workspace_new
    
-   # 完成后通知用户
+   # 3. 复制整个工作区到新位置
+   cp -r ~/.openclaw/workspace1/* ~/.openclaw/workspace_new/
+   
+   # 4. 复制配置文件（根据实际路径调整）
+   # 查看配置文件位置
+   ls -la ~/.openclaw/configs/
+   
+   # 复制配置文件（需要知道源机器人的配置文件名）
+   # 例如：cp ~/.openclaw/configs/agent-xxx.yaml ~/.openclaw/configs/agent-yyy.yaml
+   
+   # 5. 安装技能（如需要）
+   # cd ~/.openclaw/workspace_new && npx clawhub install <skill-name>
+   
+   # 6. 注册新机器人
+   openclaw create agent:main:feishu:yyy
+   
+   echo "✅ 复制完成！"
    ```
+
+4. **验证**
+   > 复制完成后，请验证：
+   > - 对目标机器人说话是否正常响应
+   > - 记忆是否正确保留
+   > - 技能是否正常工作
 
 4. **完成**
    > ✅ **复制完成！**
