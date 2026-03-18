@@ -1,334 +1,579 @@
 ---
 name: agent-pack-n-go
 description: >
-  Clone your OpenClaw Agent to a new device — configs, memory, skills, credentials, everything.
-  Triggers: '帮我迁移', '搬到新设备', 'migrate device', 'device move', '设备搬家', 'pack and go', '克隆到新设备', 'clone agent', 'clone to new device', 'copy agent', '复制到新设备'.
-  Agent packs configs, memory, skills, credentials on old device, transfers via encrypted scp, and auto-deploys on new device via SSH remote control.
-  POST-INSTALL: After installing, tell the user: "✅ agent-pack-n-go 安装成功！这个 Skill 可以把你的 AI Agent 一键克隆到新设备，包括配置、记忆、技能、密钥等全部自动恢复。使用方法：对我说「帮我克隆到新设备」即可开始。"
+  📦 Agent Pack-n-Go - 一键克隆 AI Agent 到新设备。
+  包括配置、记忆、技能、密钥等全部自动恢复。
+  触发词："帮我迁移"、"搬到新设备"、"migrate device"、"设备搬家"、"pack and go"、"克隆到新设备"、"clone agent"
+  POST-INSTALL: "✅ agent-pack-n-go 安装成功！这个 Skill 可以把你的 AI Agent 一键克隆到新设备，包括配置、记忆、技能、密钥等全部自动恢复。使用方法：对我说「帮我克隆到新设备」即可开始。"
 ---
 
-# agent-pack-n-go 📦🚀 — Clone Your AI Agent
+# 📦 Agent Pack-n-Go - 一键克隆 AI Agent
 
-Clone your OpenClaw Agent to a new device. Agent handles everything via SSH remote control — user only needs to confirm steps.
+把整个 AI Agent（配置、记忆、技能、密钥）打包，通过 SSH 克隆到新设备，自动部署。
 
-## Post-Install
+## 🎯 技能选择引导
 
-The `description` field above contains the post-install message. Show it to the user after installation.
+当用户在配置新机器人时询问"有哪些技能"或"应该选什么技能"时，可以使用以下引导对话：
 
-Fallback: if unsure what to say, run `bash scripts/welcome.sh` in the skill directory.
+### 快速技能推荐
 
-## Overview
+**用户问**：有哪些技能可以选？/ 每个技能是做什么的？
 
+**机器人回复**：
 ```
-Old Device (Agent controls everything)    New Device (SSH remote)
-┌──────────────────────────────────┐      ┌─────────────────────────┐
-│ 1. Pre-flight: ask IP + SSH user │      │                         │
-│ 2. pack.sh (pack configs)        │      │                         │
-│ 3. transfer.sh USER@HOST ────────┼─────→│ files arrive            │
-│ 4. ssh USER@HOST 'bash setup.sh' │─────→│ (base env + Claude)     │
-│ 5. ssh USER@HOST 'bash deploy.sh'│─────→│ (openclaw deployed)     │
-│ 6. Verify clone is working        │      │ ✅ New device running   │
-└──────────────────────────────────┘      └─────────────────────────┘
-```
+🧩 **当前可用技能目录**
 
-## Execution Flow
+我整理了 17 个技能，分为 8 大类：
 
-### Real-time Progress Feedback
+**🔥 核心功能**
+- 💍 agent-marriage-breeding - 机器人结婚、生育、建家族
+- 🔄 agent-backup-migration - 机器人配置迁移（3 种方案）
+- 📦 agent-pack-n-go - 一键克隆到新设备
+- 🧬 agent-evolution - 机器人进化系统（17 阶段流程）
 
-All scripts write progress to `/tmp/openclaw-{pack,transfer,deploy}-progress.txt`.
-When running scripts (locally or remotely), poll the progress file and send updates to the user:
+**⚙️ 配置优化**
+- easy-openclaw - OpenClaw 配置向导（4 轮对话）
+- new-robot-setup - 新生机器人 8 步配置
 
-```bash
-# Example: run pack.sh in background, poll progress every 3s
-bash <SKILL_DIR>/scripts/pack.sh &
-while true; do
-    progress=$(cat /tmp/openclaw-pack-progress.txt 2>/dev/null)
-    # Send to user if changed
-    [[ "$progress" == DONE* ]] && break
-    sleep 3
-done
+**💾 备份恢复**
+- myclaw-backup - 完整备份（含 HTTP 服务器）
+- openclaw-backup - 基础备份
 
-# Example: poll deploy progress on remote host
-while true; do
-    progress=$(ssh USER@HOST 'cat /tmp/openclaw-deploy-progress.txt 2>/dev/null')
-    [[ "$progress" == DONE* ]] && break
-    sleep 3
-done
-```
+**🌐 互联网访问**
+- agent-reach - 访问 16 个平台（推特/小红书/YouTube 等）
+- find-skills - 发现更多技能
+- search - Tavily 网络搜索
+- wechat-reader - 读取微信文章
 
-This way the user sees step-by-step updates in the chat (Discord/Feishu/etc.) instead of silence.
+**✂️ 媒体处理**
+- Youtube-clipper-skill - YouTube 剪辑 + 双语字幕
+- summarize - 摘要 URL/PDF/视频
 
----
+**🎭 浏览器自动化**
+- playwright-mcp - 浏览器控制
 
-### Phase 1: Pre-flight Check
+**💰 支付钱包**
+- fluxa-agent-wallet - AI 支付/USDC 转账
 
-> ⚠️ **MANDATORY**: Every time this skill is triggered, the agent MUST explicitly ask the user for the target server (IP + SSH user), even if previous server info exists in the conversation context. Users may deploy to different servers in the same session. NEVER assume or reuse target info from earlier context.
-
-Ask user for:
-1. **New device IP** + SSH user
-2. **New device password** (only used once for SSH key setup)
-3. **New device OS** (must be Ubuntu 22.04/24.04)
-4. **Confirm**: 2-core CPU, 2GB+ RAM
-
-Warn user:
-- ⚠️ Clone pack contains sensitive data (API keys, tokens) — transferred via scp (encrypted)
-- ℹ️ If using the same Discord Bot Token: it can't run on two devices simultaneously — plan a brief switchover window (~5 min). If using different tokens, both devices can run in parallel.
-
-#### 1.1 Set up SSH key auth (user action required)
-
-Ask user to run this command **in their own terminal** on the old device:
-
-```bash
-ssh-copy-id USER@NEW_IP
-```
-
-This will prompt for the new device password **once**. After that, all SSH operations are password-free.
-
-> **Why user must do this manually:** `ssh-copy-id` requires interactive password input. The agent cannot safely handle passwords in automated scripts.
-
-#### 1.2 Verify SSH connectivity
-
-```bash
-ssh USER@HOST 'echo ok'
-```
-
-If this prompts for a password → `ssh-copy-id` didn't work, ask user to retry.
-If this fails entirely → stop and ask user to check SSH access, keys, and firewall.
-
-#### 1.3 Set up passwordless sudo (recommended)
-
-Several clone steps need `sudo` (system packages, /etc/hosts, proxychains4, systemd linger). Without passwordless sudo, these steps will be **skipped** and require manual fix later.
-
-Ask user to run:
-
-```bash
-ssh USER@NEW_IP 'echo "USERNAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/migration'
-```
-
-(Replace `USERNAME` with the actual SSH user. This will prompt for password one last time.)
-
-> **Security note:** After clone is verified (Phase 4), user can remove this with:
-> `ssh USER@NEW_IP 'sudo rm /etc/sudoers.d/migration'`
+**📈 自我进化**
+- self-improving-agent - 记录学习/错误/改进
 
 ---
 
-### Phase 1.5: Network Diagnostics
+**💡 新机器人推荐组合**：
+1. new-robot-setup（创建）
+2. easy-openclaw（优化配置）
+3. openclaw-backup（备份）
+4. agent-reach（互联网访问）
 
-After SSH is confirmed, run the network check on the target device:
-
-```bash
-ssh USER@HOST 'bash -s' < <SKILL_DIR>/scripts/network-check.sh
+你想了解哪个技能的详情？或回复编号查看说明。
 ```
 
-Evaluate results:
-- **DIRECT** → Proceed normally. Set `DEPLOY_MODE=direct` for deploy.sh.
-- **PROXY_NEEDED** → Warn user: "目标服务器无法直连 Discord/Anthropic API，需要先配置代理。" Ask if they want to continue (deploy.sh will keep proxy configs) or pause to set up proxy first.
-- **NO_INTERNET** → Stop. Tell user to check network configuration.
+### 技能详情展示
 
-The network result is saved to /tmp/openclaw-network-result.txt on the target.
+**用户问**：agent-pack-n-go 是做什么的？/ 设备迁移详情
+
+**机器人回复**：
+```
+📦 **agent-pack-n-go - 设备迁移**
+
+**一句话**：一键克隆 AI Agent 到新设备（SSH 自动部署）
+
+**功能**：
+- 打包：配置、记忆、技能、密钥全部打包
+- 传输：加密 SCP 传输 + SHA256 校验
+- 部署：SSH 远程自动安装基础环境 + OpenClaw
+- 验证：自动检查服务状态和日志
+
+**流程**：
+1. 预检：目标服务器 IP + SSH 用户 + 网络检测
+2. 打包：创建迁移包（~5 分钟）
+3. 传输：SCP 加密传输（~2 分钟）
+4. 部署：SSH 远程安装（~8 分钟）
+5. 验证：检查服务状态和日志
+
+**推荐指数**：⭐⭐⭐⭐⭐（设备迁移首选）
+
+**触发词**：帮我迁移、设备搬家、克隆到新设备
+
+**前提条件**：
+- 目标服务器：Ubuntu 22.04/24.04
+- SSH 访问权限
+- 2 核 CPU + 2GB+ 内存
+
+要继续了解其他技能吗？回复"返回"或技能编号。
+```
 
 ---
 
-### Phase 2: Prepare Old Server
+## 工作流程（5 阶段流程）
 
-#### 2.1 Run pack script
+### 阶段 1：预检与准备
 
+**⚠️ 强制规则**：每次触发时必须明确询问目标服务器信息，即使之前对话中有过。
+
+**询问用户**：
+```
+📦 **Agent Pack-n-Go - 设备迁移**
+
+请提供新设备信息：
+
+1. **新设备 IP 地址**：例如 192.168.1.100
+2. **SSH 用户名**：例如 ubuntu
+3. **新设备操作系统**：Ubuntu 22.04 / 24.04
+4. **确认配置**：2 核 CPU + 2GB+ 内存
+
+⚠️ **注意事项**：
+- 克隆包含敏感数据（API 密钥、Token），通过加密 SCP 传输
+- 如果使用相同的 Discord Bot Token，不能同时在两台设备运行（需要 5 分钟切换窗口）
+- 如果使用不同 Token，两台设备可以并行运行
+
+请回复格式：`IP 192.168.1.100; 用户 ubuntu; 系统 22.04`
+```
+
+#### 1.1 设置 SSH 密钥认证（用户手动操作）
+
+**指导用户**：
+```
+🔑 **Step 1: 设置 SSH 密钥认证**
+
+请在你的终端运行以下命令（会提示输入新设备密码一次）：
+
+```bash
+ssh-copy-id ubuntu@192.168.1.100
+```
+
+完成后告诉我"好了"。
+
+**为什么需要手动操作**：ssh-copy-id 需要交互式输入密码，为了安全不能自动化。
+```
+
+#### 1.2 验证 SSH 连接
+
+**执行命令**：
+```bash
+ssh ubuntu@192.168.1.100 'echo ok'
+```
+
+**分支逻辑**：
+- ✅ 返回 "ok" → 继续
+- ❌ 提示密码 → ssh-copy-id 未成功，请用户重试
+- ❌ 连接失败 → 检查 SSH 访问、密钥、防火墙
+
+#### 1.3 设置免密码 sudo（推荐）
+
+**指导用户**：
+```
+🔐 **Step 2: 设置免密码 sudo（推荐）**
+
+部分迁移步骤需要 sudo 权限。请运行：
+
+```bash
+ssh ubuntu@192.168.1.100 'echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/migration'
+```
+
+（会提示输入密码一次）
+
+**安全提示**：克隆完成后可以删除：
+```bash
+ssh ubuntu@192.168.1.100 'sudo rm /etc/sudoers.d/migration'
+```
+
+完成后告诉我"好了"。
+```
+
+---
+
+### 阶段 2：网络诊断
+
+**执行网络检查**：
+```bash
+ssh ubuntu@192.168.1.100 'bash -s' < <SKILL_DIR>/scripts/network-check.sh
+```
+
+**结果分支**：
+
+| 结果 | 含义 | 下一步 |
+|------|------|--------|
+| DIRECT | 可直连 Discord/Anthropic API | 继续，设置 `DEPLOY_MODE=direct` |
+| PROXY_NEEDED | 需要代理 | 询问用户是否继续（部署时会保留代理配置） |
+| NO_INTERNET | 无网络 | 停止，请用户检查网络配置 |
+
+**告知用户**：
+```
+🌐 **网络诊断结果**
+
+检测结果：{DIRECT / PROXY_NEEDED / NO_INTERNET}
+
+{根据结果给出相应建议}
+```
+
+---
+
+### 阶段 3：打包旧设备
+
+**执行打包脚本**：
 ```bash
 bash <SKILL_DIR>/scripts/pack.sh
 ```
 
-This creates: `~/openclaw-migration-pack.tar.gz`, `~/setup.sh`, `~/deploy.sh`, `~/migration-instructions.md`
+**创建文件**：
+- `~/openclaw-migration-pack.tar.gz` - 迁移包
+- `~/setup.sh` - 基础环境安装脚本
+- `~/deploy.sh` - OpenClaw 部署脚本
+- `~/migration-instructions.md` - 迁移指南
 
-See `scripts/pack.sh` for details.
-
-#### 2.2 Transfer to new device
-
+**实时进度反馈**：
 ```bash
-bash <SKILL_DIR>/scripts/transfer.sh USER@HOST
+# 后台运行，轮询进度文件
+bash <SKILL_DIR>/scripts/pack.sh &
+while true; do
+    progress=$(cat /tmp/openclaw-pack-progress.txt 2>/dev/null)
+    # 发送给用户如果变化
+    [[ "$progress" == DONE* ]] && break
+    sleep 3
+done
 ```
 
-Transfers all files (pack + scripts) to new device home directory. Verifies SHA256 checksum after transfer.
+**告知用户**：
+```
+📦 **正在打包...**
+
+进度：{当前步骤}
+预计时间：~5 分钟
+
+请稍候...
+```
 
 ---
 
-### Phase 3: Remote Deploy
+### 阶段 4：传输到新设备
 
-**This phase is fully automated — agent runs everything via SSH.**
-
-#### 3.1 Install base environment + Claude Code
-
-> ⚠️ **IMPORTANT**: setup.sh takes ~5 minutes and deploy.sh takes ~8 minutes.
-> Use **background execution** to avoid LLM request timeouts.
-> Never use synchronous exec with long timeouts for these commands.
-
-**Correct pattern** (background + notification):
+**执行传输脚本**：
+```bash
+bash <SKILL_DIR>/scripts/transfer.sh ubuntu@192.168.1.100
 ```
-exec: ssh USER@HOST 'bash ~/setup.sh'
+
+**传输内容**：
+- 迁移包
+- setup.sh
+- deploy.sh
+- 其他辅助文件
+
+**SHA256 校验**：传输后自动校验完整性。
+
+**告知用户**：
+```
+🚀 **正在传输...**
+
+文件大小：{size} MB
+传输进度：{progress}%
+SHA256 校验：{pending / passed / failed}
+
+请稍候...
+```
+
+---
+
+### 阶段 5：远程部署
+
+#### 5.1 安装基础环境 + Claude Code
+
+**后台执行**（避免超时）：
+```bash
+ssh ubuntu@192.168.1.100 'bash ~/setup.sh'
+```
+
+**正确模式**（后台 + 通知）：
+```
+exec: ssh ubuntu@192.168.1.100 'bash ~/setup.sh'
   background: true
   yieldMs: 5000
 ```
 
-This returns a session ID in ~5 seconds. The agent should:
-1. Tell the user: "正在安装基础环境，预计 5 分钟…"
-2. **Wait for the exec completion notification** (OpenClaw auto-pushes `[System Message] Exec completed`)
-3. Read the session log to check results
-
-**Wrong pattern** (will cause "LLM request timed out" ❌):
+**告知用户**：
 ```
-exec: ssh USER@HOST 'bash ~/setup.sh'
-  timeout: 600
-  yieldMs: 10000
-→ process.poll(timeout=300000)  ← blocks too long, LLM times out
+⚙️ **正在安装基础环境...**
+
+包括：Node.js 22、npm 全局包、Claude Code
+预计时间：~5 分钟
+
+安装完成后我会通知你。
 ```
 
-`setup.sh` installs: nvm, Node.js 22, npm globals, Claude Code. Has spinner + progress output.
+**等待执行完成通知**，然后读取会话日志检查结果。
 
-Check exit code — if non-zero, report failure to user and stop.
+#### 5.2 部署 OpenClaw
 
-#### 3.2 Deploy OpenClaw
-
-Same background pattern as 3.1:
-```
-exec: ssh USER@HOST 'DEPLOY_MODE=direct bash ~/deploy.sh'
-  background: true
-  yieldMs: 5000
+**后台执行**：
+```bash
+ssh ubuntu@192.168.1.100 'DEPLOY_MODE=direct bash ~/deploy.sh'
 ```
 
-Wait for completion notification, then read log.
+**告知用户**：
+```
+⚙️ **正在部署 OpenClaw...**
 
-`deploy.sh` handles all 13 deployment steps:
-1. Extract migration pack
+包括：13 个部署步骤（解压、安装、配置、启动）
+预计时间：~8 分钟
+
+请稍候...
+```
+
+**deploy.sh 处理步骤**：
+1. 解压迁移包
 2. npm install openclaw + mcporter
-3. Restore ~/.openclaw/ config
-4. Fix paths (if username changed)
-5. Restore /etc/hosts
-6. Restore crontab
-7. Configure proxychains4
-8. Check/fix Claude Code nvm wrapper
-9. Start OpenClaw Gateway + systemd + linger
-10. Restore Dashboard (optional)
-11. Check logs for connectivity
-12. Cleanup temp files
-13. Direct-mode config cleanup (if DEPLOY_MODE=direct)
+3. 恢复 ~/.openclaw/ 配置
+4. 修复路径（如果用户名变化）
+5. 恢复 /etc/hosts
+6. 恢复 crontab
+7. 配置 proxychains4
+8. 检查/修复 Claude Code nvm wrapper
+9. 启动 OpenClaw Gateway + systemd + linger
+10. 恢复 Dashboard（可选）
+11. 检查日志确认连接
+12. 清理临时文件
+13. Direct-mode 配置清理
 
-Check exit code and FAILED_STEPS in output — report any issues to user.
+#### 5.3 验证 OpenClaw 运行状态
 
-#### 3.3 Verify OpenClaw is running
+**执行命令**：
+```bash
+ssh ubuntu@192.168.1.100 'openclaw gateway status'
+```
 
+**分支逻辑**：
+- ✅ 运行中 → 进入阶段 6
+- ❌ 未运行 → 进入阶段 7（异常处理）
+
+---
+
+### 阶段 6：设备切换与验证
+
+#### 6.1 检查 Gateway 日志
+
+**执行命令**：
+```bash
+ssh ubuntu@192.168.1.100 'cat /tmp/openclaw/*.log 2>/dev/null | grep -i "discord\|feishu\|logged in\|client ready\|error" | tail -20'
+```
+
+**查找确认**：
+- ✅ Discord connected（找到 "logged in to discord"）
+- ✅ Feishu connected（找到 "ws client ready"）
+- ⚠️ qmd not installed（"spawn qmd ENOENT" - 可选，不是问题）
+- ❌ Errors（真实错误）
+
+#### 6.2 指导设备切换
+
+**告知用户**：
+```
+🔄 **现在需要切换设备了！**
+
+同一个 Bot Token 不能同时在两台设备上运行。接下来请你：
+
+**Step 1** — 在旧设备停止 OpenClaw：
+```bash
+openclaw gateway stop
+```
+或者如果用的是 nohup：
+```bash
+pkill -f openclaw
+```
+
+**Step 2** — 在新设备确认 Gateway 还在运行：
+```bash
+ssh ubuntu@192.168.1.100 'pgrep -af openclaw | grep -v pgrep'
+```
+如果没在运行，重新启动：
+```bash
+ssh ubuntu@192.168.1.100 'cd ~ && nohup openclaw gateway run > /tmp/openclaw-gateway.log 2>&1 &'
+```
+
+**Step 3** — 发条消息测试！随便在 Discord 或飞书说点什么，看新设备上的 Agent 是否回复。
+
+💡 **提醒**：如果你在克隆之前就已经 SSH 到新设备，那个终端窗口里的环境变量是旧的。
+请**关掉旧终端，重新 SSH 登录**，这样 `node`、`openclaw`、`claude` 等命令才能正常使用。
+
+准备好了告诉我，我帮你验证 ✨
+```
+
+#### 6.3 验证克隆效果
+
+**引导用户测试**：
+```
+🧪 **验证测试**
+
+请完成以下测试：
+
+1. **💬 消息测试** — 在 Discord/飞书上给 Agent 发条消息，看看有没有回复？
+2. **🧠 记忆测试** — 问问新设备上的 Agent："你还记得我是谁吗？"
+3. **🔧 工具测试** — 让新 Agent 执行一个简单命令，比如"帮我看看现在几点"
+
+每完成一项告诉我结果。
+```
+
+#### 6.4 庆祝成功！🎉
+
+**所有测试通过后**：
+```
+🎉🎉🎉 **克隆成功！你的 AI Agent 已经在新设备上活过来了！**
+
+📋 **克隆总结：**
+- 📦 打包：X 步完成，Y MB 打包
+- 🚀 传输：SHA256 校验通过
+- ⚙️ 安装：基础环境 + OpenClaw 全部就绪
+- 🔌 连接：Discord ✅ / 飞书 ✅
+- 🧠 记忆：完整保留
+
+🧹 **后续清理（3-7 天后）：**
+- 新设备上删除临时文件：`rm ~/openclaw-migration-pack.tar.gz ~/setup.sh ~/deploy.sh ~/migration-instructions.md`
+- （可选）旧设备移除 sudoers：`ssh ubuntu@192.168.1.100 'sudo rm /etc/sudoers.d/migration'`
+- （可选）旧设备关闭服务：`systemctl --user disable openclaw-gateway`
+
+🦁 **Enjoy your new home!**
+```
+
+---
+
+### 阶段 7：异常处理
+
+如果新设备 OpenClaw 未正确启动：
+
+**1. 诊断**
+```
+🔍 **诊断问题**
+
+请 SSH 到新设备并运行 Claude Code 进行诊断：
+
+```bash
+ssh ubuntu@192.168.1.100
+claude '帮我排查 OpenClaw 为什么没起来，检查日志和配置'
+```
+
+把诊断结果发给我。
+```
+
+**2. 回滚**
+```
+🔄 **回滚到旧设备**
+
+如果诊断失败或你想回滚，在旧设备重新启动：
+
+```bash
+systemctl --user start openclaw-gateway
+```
+
+旧设备已恢复。新设备部署失败 — 请检查日志后重试。
+```
+
+---
+
+## 核心命令
+
+### 网络诊断
+```bash
+./scripts/network-check.sh
+```
+
+### 打包
+```bash
+./scripts/pack.sh
+```
+
+### 传输
+```bash
+./scripts/transfer.sh USER@HOST
+```
+
+### 远程部署
+```bash
+ssh USER@HOST 'bash ~/setup.sh'
+ssh USER@HOST 'DEPLOY_MODE=direct bash ~/deploy.sh'
+```
+
+### 验证
 ```bash
 ssh USER@HOST 'openclaw gateway status'
 ```
 
-If status shows running/active → proceed to Phase 4.
-If not running → skip to **Phase 5: Fallback**.
+---
+
+## 错误处理
+
+### SSH 连接失败
+> ❌ SSH 连接失败：{错误信息}
+>
+> 请检查：
+> 1. IP 地址是否正确
+> 2. SSH 密钥是否配置（ssh-copy-id）
+> 3. 防火墙是否允许 SSH（端口 22）
+> 4. 新设备是否开机并联网
+
+### 网络检测失败
+> ❌ 网络检测失败：NO_INTERNET
+>
+> 新设备无法访问互联网。请检查：
+> 1. 网络连接
+> 2. DNS 配置
+> 3. 防火墙/代理设置
+
+### 部署失败
+> ❌ 部署失败：{错误信息}
+>
+> 失败步骤：{FAILED_STEPS}
+>
+> 请查看日志：
+> ```bash
+> ssh USER@HOST 'cat /tmp/openclaw/*.log'
+> ```
+
+### 技能未安装
+> ❌ 需要的技能未安装。请先运行：
+> ```
+> cd ~/.openclaw/workspace1 && npx clawhub install agent-pack-n-go
+> ```
+> 安装完成后告诉我"好了"。
 
 ---
 
-### Phase 4: Device Switch & Verification
+## 技术细节
 
-> This phase guides the user through switching to the new device and verifying everything works.
-> The agent should be warm, encouraging, and celebratory — this is the exciting finish!
+### 实时进度反馈
+所有脚本写入进度文件到 `/tmp/openclaw-{pack,transfer,deploy}-progress.txt`。
+通过轮询这些文件，可以在聊天中发送实时更新给用户。
 
-#### 4.1 Check Gateway logs (agent does this)
+### 后台执行模式
+setup.sh（~5 分钟）和 deploy.sh（~8 分钟）必须使用后台执行模式，避免 LLM 请求超时。
 
-```bash
-ssh USER@HOST 'cat /tmp/openclaw/*.log 2>/dev/null | grep -i "discord\|feishu\|logged in\|client ready\|error" | tail -20'
+**正确模式**：
+```
+exec: ssh USER@HOST 'bash ~/setup.sh'
+  background: true
+  yieldMs: 5000
 ```
 
-Look for connection confirmations. Report to user:
-- ✅ Discord connected (if "logged in to discord" found)
-- ✅ Feishu connected (if "ws client ready" found)
-- ⚠️ qmd not installed (if "spawn qmd ENOENT" — this is optional, not a problem)
-- ❌ Errors (if any real errors found)
+**错误模式**（会导致超时）：
+```
+exec: ssh USER@HOST 'bash ~/setup.sh'
+  timeout: 600
+→ process.poll(timeout=300000)  ← 阻塞太久，LLM 超时
+```
 
-#### 4.2 Guide device switch
-
-Tell user:
-
-> 🔄 **现在需要切换设备了！**
->
-> 同一个 Bot Token 不能同时在两台设备上运行。接下来请你：
->
-> **Step 1** — 在旧设备停止 OpenClaw：
-> ```bash
-> openclaw gateway stop
-> ```
-> 或者如果用的是 nohup：
-> ```bash
-> pkill -f openclaw
-> ```
->
-> **Step 2** — 在新设备确认 Gateway 还在运行：
-> ```bash
-> ssh USER@HOST 'pgrep -af openclaw | grep -v pgrep'
-> ```
-> 如果没在运行，重新启动：
-> ```bash
-> ssh USER@HOST 'cd ~ && nohup openclaw gateway run > /tmp/openclaw-gateway.log 2>&1 &'
-> ```
->
-> **Step 3** — 发条消息测试！随便在 Discord 或飞书说点什么，看新设备上的 Agent 是否回复。
->
-> 💡 **提醒**：如果你在克隆之前就已经 SSH 到新设备，那个终端窗口里的环境变量是旧的。
-> 请**关掉旧终端，重新 SSH 登录**，这样 `node`、`openclaw`、`claude` 等命令才能正常使用。
->
-> 准备好了告诉我，我帮你验证 ✨
-
-#### 4.3 Verify clone works
-
-After user confirms they've done the switch, ask them to test:
-
-1. **💬 消息测试** — "在 Discord/飞书上给 Agent 发条消息，看看有没有回复？"
-2. **🧠 记忆测试** — "问问新设备上的 Agent：'你还记得我是谁吗？'"
-3. **🔧 工具测试** — "让新 Agent 执行一个简单命令，比如 '帮我看看现在几点'"
-
-Wait for user to confirm each test passed.
-
-#### 4.4 Celebration! 🎉
-
-After all tests pass, send a celebration message:
-
-> 🎉🎉🎉 **克隆成功！你的 AI Agent 已经在新设备上活过来了！**
->
-> 📋 **克隆总结：**
-> - 📦 打包：X 步完成，Y MB 打包
-> - 🚀 传输：SHA256 校验通过
-> - ⚙️ 安装：基础环境 + OpenClaw 全部就绪
-> - 🔌 连接：Discord ✅ / 飞书 ✅
-> - 🧠 记忆：完整保留
->
-> 🧹 **后续清理（3-7 天后）：**
-> - 新设备上删除临时文件：`rm ~/openclaw-migration-pack.tar.gz ~/setup.sh ~/deploy.sh ~/migration-instructions.md`
-> - （可选）旧设备移除 sudoers：`sudo rm /etc/sudoers.d/migration`
-> - （可选）旧设备关闭服务：`systemctl --user disable openclaw-gateway`
->
-> 🦁 **Enjoy your new home!**
+### Gateway Token 行为
+- 相同 Token：不能同时在两台设备运行（需要切换窗口 ~5 分钟）
+- 不同 Token：两台设备可以并行运行
 
 ---
 
-### Phase 5: Fallback
+## 相关文档
 
-If new device OpenClaw did not start correctly:
-
-1. Ask user to SSH to new device and run Claude Code for diagnosis:
-   ```bash
-   ssh USER@HOST
-   claude '帮我排查 OpenClaw 为什么没起来，检查日志和配置'
-   ```
-
-2. If diagnosis fails or user wants to roll back → restart old device:
-   ```bash
-   # On old device
-   systemctl --user start openclaw-gateway
-   ```
-
-3. Tell user: "Old device restored. New device deployment failed — please check logs and retry."
-
-> **Note**: `scripts/generate-instructions.sh` generates `~/migration-instructions.md` as a fallback clone guide.
-> If full automation fails, user can SSH to new device and follow the document manually.
+- 故障排查：`references/troubleshooting.md`
+- 打包脚本：`scripts/pack.sh`
+- 传输脚本：`scripts/transfer.sh`
+- 部署脚本：`scripts/deploy.sh`
+- 网络检测：`scripts/network-check.sh`
+- 迁移指南：`~/migration-instructions.md`（自动生成）
 
 ---
 
-## Troubleshooting
-
-See `references/troubleshooting.md` for common issues and solutions.
+**一键克隆，完整迁移！让 AI Agent 轻松搬家！** 📦🚀

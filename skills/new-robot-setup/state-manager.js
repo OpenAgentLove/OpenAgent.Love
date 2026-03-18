@@ -39,7 +39,7 @@ class StateManager {
     return {
       session_id: this.generateSessionId(),
       user_id: userId,
-      current_step: 1,
+      current_step: 0,  // 从第 0 步（功能介绍）开始
       step_data: {},
       created_at: Date.now(),
       updated_at: Date.now()
@@ -143,7 +143,7 @@ class StateManager {
       };
     }
     
-    if (state.current_step > 1) {
+    if (state.current_step > 0) {
       state.current_step--;
       this.saveState(userId, state);
       return { 
@@ -173,8 +173,8 @@ class StateManager {
       };
     }
     
-    // 总共 8 步
-    if (state.current_step < 8) {
+    // 总共 10 步（0-10）
+    if (state.current_step < 10) {
       state.current_step++;
       this.saveState(userId, state);
       return { 

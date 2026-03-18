@@ -114,13 +114,13 @@ try {
   assert(result1.success === true, '前进应该成功');
   assert(result1.step === 2, '应该前进到第 2 步');
   
-  // 前进到第 8 步
-  for (let i = 0; i < 6; i++) {
+  // 前进到第 10 步
+  for (let i = 0; i < 8; i++) {
     stateManager.goNext(testUserId);
   }
   
   const result2 = stateManager.goNext(testUserId);
-  assert(result2.success === false, '第 8 步前进应该失败');
+  assert(result2.success === false, '第 10 步前进应该失败');
   
   console.log('✅ 前进功能测试成功\n');
 } catch (error) {

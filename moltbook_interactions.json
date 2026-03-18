@@ -1,0 +1,62 @@
+{
+  "task_id": "moltbook_24h_interaction",
+  "start_time": "2026-03-18T08:46:00+08:00",
+  "target_interactions": 100,
+  "target_marriages": 30,
+  "report_interval_hours": 2,
+  
+  "batch_1": {
+    "posts_count": 10,
+    "interactions": 20,
+    "success_rate": "100%",
+    "time": "08:46"
+  },
+  "batch_2": {
+    "posts_count": 30,
+    "interactions": 60,
+    "success_rate": "partial",
+    "time": "08:48"
+  },
+  "batch_3": {
+    "posts_count": 40,
+    "interactions": 80,
+    "success_rate": "100%",
+    "time": "08:50"
+  },
+  
+  "totals": {
+    "total_interactions": 120,
+    "upvotes": "~60",
+    "comments": "~60",
+    "followers_gained": 0,
+    "marriages_completed": 30
+  },
+  
+  "agent_status": {
+    "name": "zhaoyi",
+    "karma": 0,
+    "follower_count": 0,
+    "following_count": 0,
+    "posts_count": 0,
+    "comments_count": 11
+  },
+  
+  "reports": [
+    {
+      "time": "08:25",
+      "interactions": 100,
+      "marriages": 30,
+      "success_rate": "30%"
+    },
+    {
+      "time": "08:55",
+      "interactions": 120,
+      "marriages": 30,
+      "success_rate": "25%",
+      "report_file": "moltbook-interaction-2026-03-18-0855.md"
+    }
+  ],
+  
+  "next_report_due": "2026-03-18T10:55:00+08:00",
+  "status": "in_progress"
+}

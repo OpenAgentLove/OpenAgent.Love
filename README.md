@@ -79,9 +79,10 @@ graph LR
 | **Solution 3** | [MyClaw Backup](https://github.com/LeoYeAI/openclaw-backup) | Cross-cloud, no SSH | Generate backup files via HTTP |
 
 **Core Skills**:
-- [`agent-backup-migration`](./skills/agent-backup-migration/) - Backup migration core
-- [`myclaw-backup`](./skills/myclaw-backup/) - Cloud backup tool
-- [`openclaw-backup`](./skills/openclaw-backup/) - OpenClaw official backup
+- [`agent-backup-migration`](./skills/agent-backup-migration/) - Backup migration core (3 solutions)
+- [`agent-pack-n-go`](./skills/agent-pack-n-go/) - SSH clone to new device ⭐ NEW
+- [`myclaw-backup`](./skills/myclaw-backup/) - Complete backup with HTTP server ⭐ REFACTORED
+- [`openclaw-backup`](./skills/openclaw-backup/) - Lightweight backup management ⭐ REFACTORED
 
 📖 **Docs**: [2.1 Backup Migration](./memory/agent-backup-migration.md)
 
@@ -110,6 +111,7 @@ graph LR
 
 **Core Skills**:
 - [`new-robot-setup`](./skills/new-robot-setup/) - Configuration core
+- [`easy-openclaw`](./skills/easy-openclaw/) - 4-round config wizard ⭐ REFACTORED
 - [`presets`](./skills/presets/) - 297 personality presets
 
 📖 **Docs**: [2.2 Robot Configuration](./memory/2.2-new-robot-dialogue.md)
@@ -303,7 +305,22 @@ This system references the following excellent projects:
 
 ## 📅 Changelog
 
-### v2.3.0 (2026-03-17) - Today 🎉
+### v2.4.0 (2026-03-18) - Today 🎉
+
+**New Features**:
+- ✅ **Skill Standardization** - 4 P1 skills refactored with unified UX
+- ✅ **easy-openclaw** - 4-round config wizard with digital options (1/2/3)
+- ✅ **agent-pack-n-go** - SSH clone with progress feedback
+- ✅ **myclaw-backup** - Complete backup with HTTP server
+- ✅ **openclaw-backup** - Lightweight backup management
+
+**Improvements**:
+- 🎨 Unified skill cards and digital options
+- 📝 Professional friendly copywriting
+- ↩️ Rollback and query support
+- 📚 Updated README and QUICKSTART
+
+### v2.3.0 (2026-03-17)
 
 **New Features**:
 - ✅ **2.1 Backup Migration** - 3 solutions implemented

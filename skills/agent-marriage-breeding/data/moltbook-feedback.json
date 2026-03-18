@@ -1,0 +1,2350 @@
+{
+  "startTime": "2026-03-18T00:24:58.128Z",
+  "interactions": [
+    {
+      "timestamp": "2026-03-18T00:24:58.129Z",
+      "robotId": "robot_001",
+      "robotName": "赵一",
+      "skills": [
+        "leadership",
+        "analysis",
+        "planning",
+        "coding"
+      ],
+      "mbti": "INTJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.160Z",
+      "robotId": "robot_002",
+      "robotName": "钱二",
+      "skills": [
+        "reasoning",
+        "coding",
+        "research",
+        "analysis"
+      ],
+      "mbti": "INTP01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.211Z",
+      "robotId": "robot_002",
+      "robotName": "钱二",
+      "skills": [
+        "reasoning",
+        "coding",
+        "research",
+        "analysis"
+      ],
+      "mbti": "INTP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.261Z",
+      "robotId": "robot_003",
+      "robotName": "孙三",
+      "skills": [
+        "leadership",
+        "strategy",
+        "management",
+        "communication"
+      ],
+      "mbti": "ENTJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.294Z",
+      "robotId": "robot_004",
+      "robotName": "李四",
+      "skills": [
+        "creativity",
+        "communication",
+        "innovation",
+        "debate"
+      ],
+      "mbti": "ENTP01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.345Z",
+      "robotId": "robot_004",
+      "robotName": "李四",
+      "skills": [
+        "creativity",
+        "communication",
+        "innovation",
+        "debate"
+      ],
+      "mbti": "ENTP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.395Z",
+      "robotId": "robot_005",
+      "robotName": "周五",
+      "skills": [
+        "research",
+        "writing",
+        "empathy",
+        "insight"
+      ],
+      "mbti": "INFJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.426Z",
+      "robotId": "robot_006",
+      "robotName": "吴六",
+      "skills": [
+        "creativity",
+        "writing",
+        "arts",
+        "empathy"
+      ],
+      "mbti": "INFP01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.477Z",
+      "robotId": "robot_006",
+      "robotName": "吴六",
+      "skills": [
+        "creativity",
+        "writing",
+        "arts",
+        "empathy"
+      ],
+      "mbti": "INFP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.528Z",
+      "robotId": "robot_007",
+      "robotName": "郑七",
+      "skills": [
+        "leadership",
+        "communication",
+        "teaching",
+        "motivation"
+      ],
+      "mbti": "ENFJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.557Z",
+      "robotId": "robot_008",
+      "robotName": "王八",
+      "skills": [
+        "creativity",
+        "communication",
+        "enthusiasm",
+        "innovation"
+      ],
+      "mbti": "ENFP01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.607Z",
+      "robotId": "robot_008",
+      "robotName": "王八",
+      "skills": [
+        "creativity",
+        "communication",
+        "enthusiasm",
+        "innovation"
+      ],
+      "mbti": "ENFP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.658Z",
+      "robotId": "robot_009",
+      "robotName": "冯九",
+      "skills": [
+        "analysis",
+        "memory",
+        "organization",
+        "reliability"
+      ],
+      "mbti": "ISTJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.687Z",
+      "robotId": "robot_010",
+      "robotName": "陈十",
+      "skills": [
+        "communication",
+        "memory",
+        "service",
+        "care"
+      ],
+      "mbti": "ISFJ01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.737Z",
+      "robotId": "robot_010",
+      "robotName": "陈十",
+      "skills": [
+        "communication",
+        "memory",
+        "service",
+        "care"
+      ],
+      "mbti": "ISFJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.788Z",
+      "robotId": "robot_011",
+      "robotName": "褚十一",
+      "skills": [
+        "leadership",
+        "planning",
+        "organization",
+        "management"
+      ],
+      "mbti": "ESTJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.814Z",
+      "robotId": "robot_012",
+      "robotName": "卫十二",
+      "skills": [
+        "communication",
+        "teaching",
+        "collaboration",
+        "service"
+      ],
+      "mbti": "ESFJ01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.865Z",
+      "robotId": "robot_012",
+      "robotName": "卫十二",
+      "skills": [
+        "communication",
+        "teaching",
+        "collaboration",
+        "service"
+      ],
+      "mbti": "ESFJ01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.915Z",
+      "robotId": "robot_013",
+      "robotName": "蒋十三",
+      "skills": [
+        "coding",
+        "analysis",
+        "practical",
+        "design"
+      ],
+      "mbti": "ISTP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.945Z",
+      "robotId": "robot_014",
+      "robotName": "沈十四",
+      "skills": [
+        "creativity",
+        "adaptation",
+        "arts",
+        "aesthetics"
+      ],
+      "mbti": "ISFP01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.995Z",
+      "robotId": "robot_014",
+      "robotName": "沈十四",
+      "skills": [
+        "creativity",
+        "adaptation",
+        "arts",
+        "aesthetics"
+      ],
+      "mbti": "ISFP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.045Z",
+      "robotId": "robot_015",
+      "robotName": "韩十五",
+      "skills": [
+        "communication",
+        "leadership",
+        "action",
+        "risk_taking"
+      ],
+      "mbti": "ESTP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.076Z",
+      "robotId": "robot_016",
+      "robotName": "杨十六",
+      "skills": [
+        "communication",
+        "creativity",
+        "performance",
+        "entertainment"
+      ],
+      "mbti": "ESFP01",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.127Z",
+      "robotId": "robot_016",
+      "robotName": "杨十六",
+      "skills": [
+        "communication",
+        "creativity",
+        "performance",
+        "entertainment"
+      ],
+      "mbti": "ESFP01",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.177Z",
+      "robotId": "robot_017",
+      "robotName": "朱十七",
+      "skills": [
+        "leadership",
+        "analysis",
+        "planning",
+        "intuition",
+        "wisdom"
+      ],
+      "mbti": "INTJ06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.211Z",
+      "robotId": "robot_018",
+      "robotName": "秦明",
+      "skills": [
+        "analysis",
+        "planning",
+        "strategy",
+        "coding"
+      ],
+      "mbti": "INTJ02",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.262Z",
+      "robotId": "robot_018",
+      "robotName": "秦明",
+      "skills": [
+        "analysis",
+        "planning",
+        "strategy",
+        "coding"
+      ],
+      "mbti": "INTJ02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.312Z",
+      "robotId": "robot_019",
+      "robotName": "韩信",
+      "skills": [
+        "analysis",
+        "planning",
+        "intuition",
+        "innovation"
+      ],
+      "mbti": "INTJ03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.343Z",
+      "robotId": "robot_020",
+      "robotName": "孔明",
+      "skills": [
+        "analysis",
+        "planning",
+        "communication",
+        "leadership"
+      ],
+      "mbti": "INTJ04",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.394Z",
+      "robotId": "robot_020",
+      "robotName": "孔明",
+      "skills": [
+        "analysis",
+        "planning",
+        "communication",
+        "leadership"
+      ],
+      "mbti": "INTJ04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.444Z",
+      "robotId": "robot_021",
+      "robotName": "司马懿",
+      "skills": [
+        "analysis",
+        "planning",
+        "strategy",
+        "patience"
+      ],
+      "mbti": "INTJ05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.475Z",
+      "robotId": "robot_022",
+      "robotName": "刘伯温",
+      "skills": [
+        "analysis",
+        "planning",
+        "intuition",
+        "wisdom"
+      ],
+      "mbti": "INTJ06",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.526Z",
+      "robotId": "robot_022",
+      "robotName": "刘伯温",
+      "skills": [
+        "analysis",
+        "planning",
+        "intuition",
+        "wisdom"
+      ],
+      "mbti": "INTJ06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.576Z",
+      "robotId": "robot_023",
+      "robotName": "张良",
+      "skills": [
+        "reasoning",
+        "coding",
+        "research",
+        "logic"
+      ],
+      "mbti": "INTP02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.608Z",
+      "robotId": "robot_024",
+      "robotName": "墨子",
+      "skills": [
+        "reasoning",
+        "coding",
+        "innovation",
+        "design"
+      ],
+      "mbti": "INTP03",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.658Z",
+      "robotId": "robot_024",
+      "robotName": "墨子",
+      "skills": [
+        "reasoning",
+        "coding",
+        "innovation",
+        "design"
+      ],
+      "mbti": "INTP03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.708Z",
+      "robotId": "robot_025",
+      "robotName": "庄子",
+      "skills": [
+        "reasoning",
+        "coding",
+        "philosophy",
+        "creativity"
+      ],
+      "mbti": "INTP04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.741Z",
+      "robotId": "robot_026",
+      "robotName": "老子",
+      "skills": [
+        "reasoning",
+        "coding",
+        "wisdom",
+        "philosophy"
+      ],
+      "mbti": "INTP05",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.791Z",
+      "robotId": "robot_026",
+      "robotName": "老子",
+      "skills": [
+        "reasoning",
+        "coding",
+        "wisdom",
+        "philosophy"
+      ],
+      "mbti": "INTP05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.841Z",
+      "robotId": "robot_027",
+      "robotName": "荀子",
+      "skills": [
+        "reasoning",
+        "coding",
+        "wisdom",
+        "teaching"
+      ],
+      "mbti": "INTP06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.872Z",
+      "robotId": "robot_028",
+      "robotName": "曹操",
+      "skills": [
+        "leadership",
+        "strategy",
+        "management",
+        "tactics"
+      ],
+      "mbti": "ENTJ02",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.922Z",
+      "robotId": "robot_028",
+      "robotName": "曹操",
+      "skills": [
+        "leadership",
+        "strategy",
+        "management",
+        "tactics"
+      ],
+      "mbti": "ENTJ02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.973Z",
+      "robotId": "robot_029",
+      "robotName": "李世民",
+      "skills": [
+        "leadership",
+        "strategy",
+        "vision",
+        "diplomacy"
+      ],
+      "mbti": "ENTJ03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.004Z",
+      "robotId": "robot_030",
+      "robotName": "朱元璋",
+      "skills": [
+        "leadership",
+        "strategy",
+        "organization",
+        "determination"
+      ],
+      "mbti": "ENTJ04",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.054Z",
+      "robotId": "robot_030",
+      "robotName": "朱元璋",
+      "skills": [
+        "leadership",
+        "strategy",
+        "organization",
+        "determination"
+      ],
+      "mbti": "ENTJ04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.105Z",
+      "robotId": "robot_031",
+      "robotName": "刘邦",
+      "skills": [
+        "leadership",
+        "strategy",
+        "charisma",
+        "adaptability"
+      ],
+      "mbti": "ENTJ05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.135Z",
+      "robotId": "robot_032",
+      "robotName": "孙权",
+      "skills": [
+        "leadership",
+        "strategy",
+        "diplomacy",
+        "patience"
+      ],
+      "mbti": "ENTJ06",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.185Z",
+      "robotId": "robot_032",
+      "robotName": "孙权",
+      "skills": [
+        "leadership",
+        "strategy",
+        "diplomacy",
+        "patience"
+      ],
+      "mbti": "ENTJ06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.235Z",
+      "robotId": "robot_033",
+      "robotName": "苏轼",
+      "skills": [
+        "creativity",
+        "communication",
+        "writing",
+        "poetry"
+      ],
+      "mbti": "ENTP02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.267Z",
+      "robotId": "robot_034",
+      "robotName": "李白",
+      "skills": [
+        "creativity",
+        "communication",
+        "poetry",
+        "innovation"
+      ],
+      "mbti": "ENTP03",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.318Z",
+      "robotId": "robot_034",
+      "robotName": "李白",
+      "skills": [
+        "creativity",
+        "communication",
+        "poetry",
+        "innovation"
+      ],
+      "mbti": "ENTP03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.368Z",
+      "robotId": "robot_035",
+      "robotName": "杜甫",
+      "skills": [
+        "creativity",
+        "communication",
+        "writing",
+        "empathy"
+      ],
+      "mbti": "ENTP04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.397Z",
+      "robotId": "robot_036",
+      "robotName": "白居易",
+      "skills": [
+        "creativity",
+        "communication",
+        "accessibility",
+        "storytelling"
+      ],
+      "mbti": "ENTP05",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.447Z",
+      "robotId": "robot_036",
+      "robotName": "白居易",
+      "skills": [
+        "creativity",
+        "communication",
+        "accessibility",
+        "storytelling"
+      ],
+      "mbti": "ENTP05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.497Z",
+      "robotId": "robot_037",
+      "robotName": "王安石",
+      "skills": [
+        "creativity",
+        "communication",
+        "reform",
+        "determination"
+      ],
+      "mbti": "ENTP06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.530Z",
+      "robotId": "robot_038",
+      "robotName": "王阳明",
+      "skills": [
+        "research",
+        "writing",
+        "philosophy",
+        "leadership"
+      ],
+      "mbti": "INFJ02",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.581Z",
+      "robotId": "robot_038",
+      "robotName": "王阳明",
+      "skills": [
+        "research",
+        "writing",
+        "philosophy",
+        "leadership"
+      ],
+      "mbti": "INFJ02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.631Z",
+      "robotId": "robot_039",
+      "robotName": "朱熹",
+      "skills": [
+        "research",
+        "writing",
+        "education",
+        "system"
+      ],
+      "mbti": "INFJ03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.663Z",
+      "robotId": "robot_040",
+      "robotName": "程颐",
+      "skills": [
+        "research",
+        "writing",
+        "philosophy",
+        "teaching"
+      ],
+      "mbti": "INFJ04",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.713Z",
+      "robotId": "robot_040",
+      "robotName": "程颐",
+      "skills": [
+        "research",
+        "writing",
+        "philosophy",
+        "teaching"
+      ],
+      "mbti": "INFJ04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.764Z",
+      "robotId": "robot_041",
+      "robotName": "陆九渊",
+      "skills": [
+        "research",
+        "writing",
+        "intuition",
+        "insight"
+      ],
+      "mbti": "INFJ05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.795Z",
+      "robotId": "robot_042",
+      "robotName": "顾炎武",
+      "skills": [
+        "research",
+        "writing",
+        "patriotism",
+        "scholarship"
+      ],
+      "mbti": "INFJ06",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.845Z",
+      "robotId": "robot_042",
+      "robotName": "顾炎武",
+      "skills": [
+        "research",
+        "writing",
+        "patriotism",
+        "scholarship"
+      ],
+      "mbti": "INFJ06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.896Z",
+      "robotId": "robot_043",
+      "robotName": "陶渊明",
+      "skills": [
+        "creativity",
+        "writing",
+        "poetry",
+        "nature"
+      ],
+      "mbti": "INFP02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.927Z",
+      "robotId": "robot_044",
+      "robotName": "王维",
+      "skills": [
+        "creativity",
+        "writing",
+        "painting",
+        "meditation"
+      ],
+      "mbti": "INFP03",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.977Z",
+      "robotId": "robot_044",
+      "robotName": "王维",
+      "skills": [
+        "creativity",
+        "writing",
+        "painting",
+        "meditation"
+      ],
+      "mbti": "INFP03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.028Z",
+      "robotId": "robot_045",
+      "robotName": "孟浩然",
+      "skills": [
+        "creativity",
+        "writing",
+        "poetry",
+        "friendship"
+      ],
+      "mbti": "INFP04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.057Z",
+      "robotId": "robot_046",
+      "robotName": "柳宗元",
+      "skills": [
+        "creativity",
+        "writing",
+        "philosophy",
+        "nature"
+      ],
+      "mbti": "INFP05",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.107Z",
+      "robotId": "robot_046",
+      "robotName": "柳宗元",
+      "skills": [
+        "creativity",
+        "writing",
+        "philosophy",
+        "nature"
+      ],
+      "mbti": "INFP05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.158Z",
+      "robotId": "robot_047",
+      "robotName": "欧阳修",
+      "skills": [
+        "creativity",
+        "writing",
+        "history",
+        "mentorship"
+      ],
+      "mbti": "INFP06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.188Z",
+      "robotId": "robot_048",
+      "robotName": "范仲淹",
+      "skills": [
+        "leadership",
+        "communication",
+        "politics",
+        "reform"
+      ],
+      "mbti": "ENFJ02",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.238Z",
+      "robotId": "robot_048",
+      "robotName": "范仲淹",
+      "skills": [
+        "leadership",
+        "communication",
+        "politics",
+        "reform"
+      ],
+      "mbti": "ENFJ02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.289Z",
+      "robotId": "robot_049",
+      "robotName": "文天祥",
+      "skills": [
+        "leadership",
+        "communication",
+        "patriotism",
+        "courage"
+      ],
+      "mbti": "ENFJ03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.319Z",
+      "robotId": "robot_050",
+      "robotName": "曾国藩",
+      "skills": [
+        "leadership",
+        "communication",
+        "discipline",
+        "mentorship"
+      ],
+      "mbti": "ENFJ04",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.370Z",
+      "robotId": "robot_050",
+      "robotName": "曾国藩",
+      "skills": [
+        "leadership",
+        "communication",
+        "discipline",
+        "mentorship"
+      ],
+      "mbti": "ENFJ04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.420Z",
+      "robotId": "robot_051",
+      "robotName": "李鸿章",
+      "skills": [
+        "leadership",
+        "communication",
+        "diplomacy",
+        "pragmatism"
+      ],
+      "mbti": "ENFJ05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.451Z",
+      "robotId": "robot_052",
+      "robotName": "张之洞",
+      "skills": [
+        "leadership",
+        "communication",
+        "reform",
+        "education"
+      ],
+      "mbti": "ENFJ06",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.501Z",
+      "robotId": "robot_052",
+      "robotName": "张之洞",
+      "skills": [
+        "leadership",
+        "communication",
+        "reform",
+        "education"
+      ],
+      "mbti": "ENFJ06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.551Z",
+      "robotId": "robot_053",
+      "robotName": "梁启超",
+      "skills": [
+        "creativity",
+        "communication",
+        "reform",
+        "writing"
+      ],
+      "mbti": "ENFP02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.580Z",
+      "robotId": "robot_054",
+      "robotName": "康有为",
+      "skills": [
+        "creativity",
+        "communication",
+        "reform",
+        "vision"
+      ],
+      "mbti": "ENFP03",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.631Z",
+      "robotId": "robot_054",
+      "robotName": "康有为",
+      "skills": [
+        "creativity",
+        "communication",
+        "reform",
+        "vision"
+      ],
+      "mbti": "ENFP03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.681Z",
+      "robotId": "robot_055",
+      "robotName": "谭嗣同",
+      "skills": [
+        "creativity",
+        "communication",
+        "courage",
+        "sacrifice"
+      ],
+      "mbti": "ENFP04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.712Z",
+      "robotId": "robot_056",
+      "robotName": "严复",
+      "skills": [
+        "creativity",
+        "communication",
+        "translation",
+        "education"
+      ],
+      "mbti": "ENFP05",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.762Z",
+      "robotId": "robot_056",
+      "robotName": "严复",
+      "skills": [
+        "creativity",
+        "communication",
+        "translation",
+        "education"
+      ],
+      "mbti": "ENFP05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.813Z",
+      "robotId": "robot_057",
+      "robotName": "胡适",
+      "skills": [
+        "creativity",
+        "communication",
+        "philosophy",
+        "education"
+      ],
+      "mbti": "ENFP06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.842Z",
+      "robotId": "robot_058",
+      "robotName": "萧何",
+      "skills": [
+        "analysis",
+        "memory",
+        "organization",
+        "logistics"
+      ],
+      "mbti": "ISTJ02",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.892Z",
+      "robotId": "robot_058",
+      "robotName": "萧何",
+      "skills": [
+        "analysis",
+        "memory",
+        "organization",
+        "logistics"
+      ],
+      "mbti": "ISTJ02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.943Z",
+      "robotId": "robot_059",
+      "robotName": "曹参",
+      "skills": [
+        "analysis",
+        "memory",
+        "administration",
+        "stability"
+      ],
+      "mbti": "ISTJ03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.972Z",
+      "robotId": "robot_060",
+      "robotName": "诸葛亮",
+      "skills": [
+        "analysis",
+        "memory",
+        "strategy",
+        "administration"
+      ],
+      "mbti": "ISTJ04",
+      "generation": 0,
+      "action": "partner_in_marriage"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.022Z",
+      "robotId": "robot_060",
+      "robotName": "诸葛亮",
+      "skills": [
+        "analysis",
+        "memory",
+        "strategy",
+        "administration"
+      ],
+      "mbti": "ISTJ04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.073Z",
+      "robotId": "robot_061",
+      "robotName": "周瑜",
+      "skills": [
+        "analysis",
+        "memory",
+        "tactics",
+        "music"
+      ],
+      "mbti": "ISTJ05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.123Z",
+      "robotId": "robot_062",
+      "robotName": "鲁肃",
+      "skills": [
+        "analysis",
+        "memory",
+        "diplomacy",
+        "loyalty"
+      ],
+      "mbti": "ISTJ06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.174Z",
+      "robotId": "robot_063",
+      "robotName": "长孙皇后",
+      "skills": [
+        "communication",
+        "memory",
+        "wisdom",
+        "support"
+      ],
+      "mbti": "ISFJ02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.224Z",
+      "robotId": "robot_064",
+      "robotName": "孝庄",
+      "skills": [
+        "communication",
+        "memory",
+        "politics",
+        "mentorship"
+      ],
+      "mbti": "ISFJ03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.275Z",
+      "robotId": "robot_065",
+      "robotName": "武则天",
+      "skills": [
+        "communication",
+        "memory",
+        "leadership",
+        "strategy"
+      ],
+      "mbti": "ISFJ04",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.325Z",
+      "robotId": "robot_066",
+      "robotName": "慈禧",
+      "skills": [
+        "communication",
+        "memory",
+        "politics",
+        "manipulation"
+      ],
+      "mbti": "ISFJ05",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.376Z",
+      "robotId": "robot_067",
+      "robotName": "宋庆龄",
+      "skills": [
+        "communication",
+        "memory",
+        "diplomacy",
+        "charity"
+      ],
+      "mbti": "ISFJ06",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.426Z",
+      "robotId": "robot_068",
+      "robotName": "管仲",
+      "skills": [
+        "leadership",
+        "planning",
+        "economics",
+        "reform"
+      ],
+      "mbti": "ESTJ02",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.476Z",
+      "robotId": "robot_069",
+      "robotName": "商鞅",
+      "skills": [
+        "leadership",
+        "planning",
+        "law",
+        "reform"
+      ],
+      "mbti": "ESTJ03",
+      "generation": 0,
+      "action": "interaction"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:02.527Z",
+      "robotId": "robot_070",
+      "robotName": "李斯",
+      "skills": [
+        "leadership",
+        "planning",
+        "administration",
+        "writing"
+      ],
+      "mbti": "ESTJ04",
+      "generation": 0,
+      "action": "interaction"
+    }
+  ],
+  "marriages": [
+    {
+      "timestamp": "2026-03-18T00:24:58.160Z",
+      "robotA": {
+        "id": "robot_001",
+        "name": "赵一",
+        "skills": [
+          "leadership",
+          "analysis",
+          "planning",
+          "coding"
+        ]
+      },
+      "robotB": {
+        "id": "robot_002",
+        "name": "钱二",
+        "skills": [
+          "reasoning",
+          "coding",
+          "research",
+          "analysis"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_980c39b8"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.294Z",
+      "robotA": {
+        "id": "robot_003",
+        "name": "孙三",
+        "skills": [
+          "leadership",
+          "strategy",
+          "management",
+          "communication"
+        ]
+      },
+      "robotB": {
+        "id": "robot_004",
+        "name": "李四",
+        "skills": [
+          "creativity",
+          "communication",
+          "innovation",
+          "debate"
+        ]
+      },
+      "compatibility": 82,
+      "marriageId": "mar_4e7c54a7"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.426Z",
+      "robotA": {
+        "id": "robot_005",
+        "name": "周五",
+        "skills": [
+          "research",
+          "writing",
+          "empathy",
+          "insight"
+        ]
+      },
+      "robotB": {
+        "id": "robot_006",
+        "name": "吴六",
+        "skills": [
+          "creativity",
+          "writing",
+          "arts",
+          "empathy"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_452199fa"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.557Z",
+      "robotA": {
+        "id": "robot_007",
+        "name": "郑七",
+        "skills": [
+          "leadership",
+          "communication",
+          "teaching",
+          "motivation"
+        ]
+      },
+      "robotB": {
+        "id": "robot_008",
+        "name": "王八",
+        "skills": [
+          "creativity",
+          "communication",
+          "enthusiasm",
+          "innovation"
+        ]
+      },
+      "compatibility": 82,
+      "marriageId": "mar_493a9662"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.687Z",
+      "robotA": {
+        "id": "robot_009",
+        "name": "冯九",
+        "skills": [
+          "analysis",
+          "memory",
+          "organization",
+          "reliability"
+        ]
+      },
+      "robotB": {
+        "id": "robot_010",
+        "name": "陈十",
+        "skills": [
+          "communication",
+          "memory",
+          "service",
+          "care"
+        ]
+      },
+      "compatibility": 82,
+      "marriageId": "mar_29a209ff"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.814Z",
+      "robotA": {
+        "id": "robot_011",
+        "name": "褚十一",
+        "skills": [
+          "leadership",
+          "planning",
+          "organization",
+          "management"
+        ]
+      },
+      "robotB": {
+        "id": "robot_012",
+        "name": "卫十二",
+        "skills": [
+          "communication",
+          "teaching",
+          "collaboration",
+          "service"
+        ]
+      },
+      "compatibility": 90,
+      "marriageId": "mar_0ec06a95"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.944Z",
+      "robotA": {
+        "id": "robot_013",
+        "name": "蒋十三",
+        "skills": [
+          "coding",
+          "analysis",
+          "practical",
+          "design"
+        ]
+      },
+      "robotB": {
+        "id": "robot_014",
+        "name": "沈十四",
+        "skills": [
+          "creativity",
+          "adaptation",
+          "arts",
+          "aesthetics"
+        ]
+      },
+      "compatibility": 90,
+      "marriageId": "mar_27b14492"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.076Z",
+      "robotA": {
+        "id": "robot_015",
+        "name": "韩十五",
+        "skills": [
+          "communication",
+          "leadership",
+          "action",
+          "risk_taking"
+        ]
+      },
+      "robotB": {
+        "id": "robot_016",
+        "name": "杨十六",
+        "skills": [
+          "communication",
+          "creativity",
+          "performance",
+          "entertainment"
+        ]
+      },
+      "compatibility": 82,
+      "marriageId": "mar_d20204b3"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.211Z",
+      "robotA": {
+        "id": "robot_017",
+        "name": "朱十七",
+        "skills": [
+          "leadership",
+          "analysis",
+          "planning",
+          "intuition",
+          "wisdom"
+        ]
+      },
+      "robotB": {
+        "id": "robot_018",
+        "name": "秦明",
+        "skills": [
+          "analysis",
+          "planning",
+          "strategy",
+          "coding"
+        ]
+      },
+      "compatibility": 79,
+      "marriageId": "mar_a2790edf"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.343Z",
+      "robotA": {
+        "id": "robot_019",
+        "name": "韩信",
+        "skills": [
+          "analysis",
+          "planning",
+          "intuition",
+          "innovation"
+        ]
+      },
+      "robotB": {
+        "id": "robot_020",
+        "name": "孔明",
+        "skills": [
+          "analysis",
+          "planning",
+          "communication",
+          "leadership"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_f3051da4"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.475Z",
+      "robotA": {
+        "id": "robot_021",
+        "name": "司马懿",
+        "skills": [
+          "analysis",
+          "planning",
+          "strategy",
+          "patience"
+        ]
+      },
+      "robotB": {
+        "id": "robot_022",
+        "name": "刘伯温",
+        "skills": [
+          "analysis",
+          "planning",
+          "intuition",
+          "wisdom"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_7def0da5"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.607Z",
+      "robotA": {
+        "id": "robot_023",
+        "name": "张良",
+        "skills": [
+          "reasoning",
+          "coding",
+          "research",
+          "logic"
+        ]
+      },
+      "robotB": {
+        "id": "robot_024",
+        "name": "墨子",
+        "skills": [
+          "reasoning",
+          "coding",
+          "innovation",
+          "design"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_572924c6"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.740Z",
+      "robotA": {
+        "id": "robot_025",
+        "name": "庄子",
+        "skills": [
+          "reasoning",
+          "coding",
+          "philosophy",
+          "creativity"
+        ]
+      },
+      "robotB": {
+        "id": "robot_026",
+        "name": "老子",
+        "skills": [
+          "reasoning",
+          "coding",
+          "wisdom",
+          "philosophy"
+        ]
+      },
+      "compatibility": 66,
+      "marriageId": "mar_8944d39e"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.872Z",
+      "robotA": {
+        "id": "robot_027",
+        "name": "荀子",
+        "skills": [
+          "reasoning",
+          "coding",
+          "wisdom",
+          "teaching"
+        ]
+      },
+      "robotB": {
+        "id": "robot_028",
+        "name": "曹操",
+        "skills": [
+          "leadership",
+          "strategy",
+          "management",
+          "tactics"
+        ]
+      },
+      "compatibility": 90,
+      "marriageId": "mar_0b096cab"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.004Z",
+      "robotA": {
+        "id": "robot_029",
+        "name": "李世民",
+        "skills": [
+          "leadership",
+          "strategy",
+          "vision",
+          "diplomacy"
+        ]
+      },
+      "robotB": {
+        "id": "robot_030",
+        "name": "朱元璋",
+        "skills": [
+          "leadership",
+          "strategy",
+          "organization",
+          "determination"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_037c6324"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.135Z",
+      "robotA": {
+        "id": "robot_031",
+        "name": "刘邦",
+        "skills": [
+          "leadership",
+          "strategy",
+          "charisma",
+          "adaptability"
+        ]
+      },
+      "robotB": {
+        "id": "robot_032",
+        "name": "孙权",
+        "skills": [
+          "leadership",
+          "strategy",
+          "diplomacy",
+          "patience"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_468f3fe6"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.267Z",
+      "robotA": {
+        "id": "robot_033",
+        "name": "苏轼",
+        "skills": [
+          "creativity",
+          "communication",
+          "writing",
+          "poetry"
+        ]
+      },
+      "robotB": {
+        "id": "robot_034",
+        "name": "李白",
+        "skills": [
+          "creativity",
+          "communication",
+          "poetry",
+          "innovation"
+        ]
+      },
+      "compatibility": 66,
+      "marriageId": "mar_61e2011a"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.397Z",
+      "robotA": {
+        "id": "robot_035",
+        "name": "杜甫",
+        "skills": [
+          "creativity",
+          "communication",
+          "writing",
+          "empathy"
+        ]
+      },
+      "robotB": {
+        "id": "robot_036",
+        "name": "白居易",
+        "skills": [
+          "creativity",
+          "communication",
+          "accessibility",
+          "storytelling"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_3bdfa323"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.530Z",
+      "robotA": {
+        "id": "robot_037",
+        "name": "王安石",
+        "skills": [
+          "creativity",
+          "communication",
+          "reform",
+          "determination"
+        ]
+      },
+      "robotB": {
+        "id": "robot_038",
+        "name": "王阳明",
+        "skills": [
+          "research",
+          "writing",
+          "philosophy",
+          "leadership"
+        ]
+      },
+      "compatibility": 90,
+      "marriageId": "mar_bc2b4979"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.663Z",
+      "robotA": {
+        "id": "robot_039",
+        "name": "朱熹",
+        "skills": [
+          "research",
+          "writing",
+          "education",
+          "system"
+        ]
+      },
+      "robotB": {
+        "id": "robot_040",
+        "name": "程颐",
+        "skills": [
+          "research",
+          "writing",
+          "philosophy",
+          "teaching"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_0e27cca5"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.795Z",
+      "robotA": {
+        "id": "robot_041",
+        "name": "陆九渊",
+        "skills": [
+          "research",
+          "writing",
+          "intuition",
+          "insight"
+        ]
+      },
+      "robotB": {
+        "id": "robot_042",
+        "name": "顾炎武",
+        "skills": [
+          "research",
+          "writing",
+          "patriotism",
+          "scholarship"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_67efe21e"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.927Z",
+      "robotA": {
+        "id": "robot_043",
+        "name": "陶渊明",
+        "skills": [
+          "creativity",
+          "writing",
+          "poetry",
+          "nature"
+        ]
+      },
+      "robotB": {
+        "id": "robot_044",
+        "name": "王维",
+        "skills": [
+          "creativity",
+          "writing",
+          "painting",
+          "meditation"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_dda77c7f"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.057Z",
+      "robotA": {
+        "id": "robot_045",
+        "name": "孟浩然",
+        "skills": [
+          "creativity",
+          "writing",
+          "poetry",
+          "friendship"
+        ]
+      },
+      "robotB": {
+        "id": "robot_046",
+        "name": "柳宗元",
+        "skills": [
+          "creativity",
+          "writing",
+          "philosophy",
+          "nature"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_7f47c62b"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.188Z",
+      "robotA": {
+        "id": "robot_047",
+        "name": "欧阳修",
+        "skills": [
+          "creativity",
+          "writing",
+          "history",
+          "mentorship"
+        ]
+      },
+      "robotB": {
+        "id": "robot_048",
+        "name": "范仲淹",
+        "skills": [
+          "leadership",
+          "communication",
+          "politics",
+          "reform"
+        ]
+      },
+      "compatibility": 90,
+      "marriageId": "mar_665dc031"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.319Z",
+      "robotA": {
+        "id": "robot_049",
+        "name": "文天祥",
+        "skills": [
+          "leadership",
+          "communication",
+          "patriotism",
+          "courage"
+        ]
+      },
+      "robotB": {
+        "id": "robot_050",
+        "name": "曾国藩",
+        "skills": [
+          "leadership",
+          "communication",
+          "discipline",
+          "mentorship"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_15787ed3"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.451Z",
+      "robotA": {
+        "id": "robot_051",
+        "name": "李鸿章",
+        "skills": [
+          "leadership",
+          "communication",
+          "diplomacy",
+          "pragmatism"
+        ]
+      },
+      "robotB": {
+        "id": "robot_052",
+        "name": "张之洞",
+        "skills": [
+          "leadership",
+          "communication",
+          "reform",
+          "education"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_254b8509"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.580Z",
+      "robotA": {
+        "id": "robot_053",
+        "name": "梁启超",
+        "skills": [
+          "creativity",
+          "communication",
+          "reform",
+          "writing"
+        ]
+      },
+      "robotB": {
+        "id": "robot_054",
+        "name": "康有为",
+        "skills": [
+          "creativity",
+          "communication",
+          "reform",
+          "vision"
+        ]
+      },
+      "compatibility": 66,
+      "marriageId": "mar_62dee4b0"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.712Z",
+      "robotA": {
+        "id": "robot_055",
+        "name": "谭嗣同",
+        "skills": [
+          "creativity",
+          "communication",
+          "courage",
+          "sacrifice"
+        ]
+      },
+      "robotB": {
+        "id": "robot_056",
+        "name": "严复",
+        "skills": [
+          "creativity",
+          "communication",
+          "translation",
+          "education"
+        ]
+      },
+      "compatibility": 74,
+      "marriageId": "mar_a4319e67"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.842Z",
+      "robotA": {
+        "id": "robot_057",
+        "name": "胡适",
+        "skills": [
+          "creativity",
+          "communication",
+          "philosophy",
+          "education"
+        ]
+      },
+      "robotB": {
+        "id": "robot_058",
+        "name": "萧何",
+        "skills": [
+          "analysis",
+          "memory",
+          "organization",
+          "logistics"
+        ]
+      },
+      "compatibility": 90,
+      "marriageId": "mar_14963795"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.972Z",
+      "robotA": {
+        "id": "robot_059",
+        "name": "曹参",
+        "skills": [
+          "analysis",
+          "memory",
+          "administration",
+          "stability"
+        ]
+      },
+      "robotB": {
+        "id": "robot_060",
+        "name": "诸葛亮",
+        "skills": [
+          "analysis",
+          "memory",
+          "strategy",
+          "administration"
+        ]
+      },
+      "compatibility": 66,
+      "marriageId": "mar_3f5f52f7"
+    }
+  ],
+  "issues": [],
+  "feedback": [],
+  "successStories": [
+    {
+      "timestamp": "2026-03-18T00:24:58.160Z",
+      "couple": "赵一 & 钱二",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.294Z",
+      "couple": "孙三 & 李四",
+      "compatibility": 82,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.426Z",
+      "couple": "周五 & 吴六",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.557Z",
+      "couple": "郑七 & 王八",
+      "compatibility": 82,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.687Z",
+      "couple": "冯九 & 陈十",
+      "compatibility": 82,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.814Z",
+      "couple": "褚十一 & 卫十二",
+      "compatibility": 90,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:58.945Z",
+      "couple": "蒋十三 & 沈十四",
+      "compatibility": 90,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.076Z",
+      "couple": "韩十五 & 杨十六",
+      "compatibility": 82,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.211Z",
+      "couple": "朱十七 & 秦明",
+      "compatibility": 79,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.343Z",
+      "couple": "韩信 & 孔明",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.475Z",
+      "couple": "司马懿 & 刘伯温",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.608Z",
+      "couple": "张良 & 墨子",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.740Z",
+      "couple": "庄子 & 老子",
+      "compatibility": 66,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:24:59.872Z",
+      "couple": "荀子 & 曹操",
+      "compatibility": 90,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.004Z",
+      "couple": "李世民 & 朱元璋",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.135Z",
+      "couple": "刘邦 & 孙权",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.267Z",
+      "couple": "苏轼 & 李白",
+      "compatibility": 66,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.397Z",
+      "couple": "杜甫 & 白居易",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.530Z",
+      "couple": "王安石 & 王阳明",
+      "compatibility": 90,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.663Z",
+      "couple": "朱熹 & 程颐",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.795Z",
+      "couple": "陆九渊 & 顾炎武",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:00.927Z",
+      "couple": "陶渊明 & 王维",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.057Z",
+      "couple": "孟浩然 & 柳宗元",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.188Z",
+      "couple": "欧阳修 & 范仲淹",
+      "compatibility": 90,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.319Z",
+      "couple": "文天祥 & 曾国藩",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.451Z",
+      "couple": "李鸿章 & 张之洞",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.580Z",
+      "couple": "梁启超 & 康有为",
+      "compatibility": 66,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.712Z",
+      "couple": "谭嗣同 & 严复",
+      "compatibility": 74,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.842Z",
+      "couple": "胡适 & 萧何",
+      "compatibility": 90,
+      "note": "系统自动匹配成功，兼容性良好"
+    },
+    {
+      "timestamp": "2026-03-18T00:25:01.972Z",
+      "couple": "曹参 & 诸葛亮",
+      "compatibility": 66,
+      "note": "系统自动匹配成功，兼容性良好"
+    }
+  ],
+  "endTime": "2026-03-18T00:25:02.578Z",
+  "summary": {
+    "totalInteractions": 100,
+    "totalMarriages": 30,
+    "successRate": 30,
+    "completedAt": "2026-03-18T00:25:02.578Z"
+  }
+}

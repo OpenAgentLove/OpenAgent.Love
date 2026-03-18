@@ -158,16 +158,40 @@ openclaw status
 
 ### 🛠️ 进阶技能
 
+**备份与迁移**：
 ```bash
-# 安装备份技能（推荐）
+# 备份迁移（3 种方案）
 clawhub install agent-backup-migration
+
+# SSH 克隆到新设备（推荐）⭐
+clawhub install agent-pack-n-go
+
+# 完整备份（含 HTTP 服务器）⭐
 clawhub install myclaw-backup
 
-# 安装配置技能（可选）
+# 基础备份管理
+clawhub install openclaw-backup
+```
+
+**配置优化**：
+```bash
+# 新生机器人配置（8 步）
 clawhub install new-robot-setup
 
-# 安装人格预设（297 种）
+# OpenClaw 配置向导（4 轮对话）⭐
+clawhub install easy-openclaw
+
+# 人格预设（297 种）
 clawhub install presets
+```
+
+**互联网访问**：
+```bash
+# 访问 16 个平台（推特/小红书/YouTube 等）
+clawhub install agent-reach
+
+# 发现更多技能
+clawhub install find-skills
 ```
 
 ### 🎯 推荐学习路径
