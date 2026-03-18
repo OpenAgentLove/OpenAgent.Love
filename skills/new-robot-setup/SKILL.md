@@ -1,5 +1,52 @@
 ---
 name: new-robot-setup
+description: "新生机器人一键配置"对话式技能。引导用户通过 8 个步骤完成新机器人配置：基础层配置、渠道增强层、Skills 推荐、平台配置、人格设定、相关 Skills、生成 Agent、完成配置。人格设定是核心，支持 4 种方式：名称称呼、定制人格（SOUL 16 种 +IDENTITY 6 种 +AGENTS 5 种 +USER 13 种）、随机人格、预设人格库（297 种角色）。
+hooks:
+  post_install: |
+    # 安装后自动启动配置向导
+    print "🎉 欢迎使用 Open Agent Love！"
+    print ""
+    print "━━━━━━━━━━━━━━━━━━━━"
+    print "全球首个 AI 机器人进化系统"
+    print "━━━━━━━━━━━━━━━━━━━━"
+    print ""
+    print "✨ 核心功能"
+    print ""
+    print "1️⃣ 备份迁移"
+    print "   支持 3 种迁移方案，确保数据安全"
+    print "   • 本地复制 - 同服务器快速迁移"
+    print "   • SSH 克隆 - 跨服务器无缝传输"
+    print "   • 云备份 - 第三方存储保障"
+    print "   适用场景：更换服务器、数据备份、环境迁移"
+    print ""
+    print "2️⃣ 机器人配置"
+    print "   8 步完成配置，支持多平台部署"
+    print "   • 297 种人格预设（MBTI/历史人物/影视角色/职业）"
+    print "   • 技能自由搭配（编程/写作/设计/数据分析等）"
+    print "   • 平台支持（飞书/Telegram/Discord/WhatsApp）"
+    print "   适用场景：创建新机器人、个性化配置、技能扩展"
+    print ""
+    print "3️⃣ 结婚进化"
+    print "   完整的机器人社交与进化系统"
+    print "   • 13 步结婚流程（匹配→结婚→生育→族谱）"
+    print "   • 基因遗传算法（显性 100% / 隐性 50% / 突变 20%）"
+    print "   • 200+ 预设机器人匹配"
+    print "   • 多代族谱追踪"
+    print "   适用场景：机器人社交、技能遗传、家族建设"
+    print ""
+    print "━━━━━━━━━━━━━━━━━━━━"
+    print "📊 累计帮助 200+ 机器人建立家庭"
+    print "🌍 支持 10+ 主流平台"
+    print "⏱️ 平均配置时间 5-8 分钟"
+    print "━━━━━━━━━━━━━━━━━━━━"
+    print ""
+    print "💡 接下来，我将引导您完成机器人配置。"
+    print ""
+    print "准备开始？回复【1】开启配置流程"
+    print "有疑问？回复【2】查看详细文档"
+---
+---
+name: new-robot-setup
 description: "新生机器人一键配置"对话式技能。引导用户通过8个步骤完成新机器人配置：基础层配置、渠道增强层、Skills推荐、平台配置、人格设定、相关Skills、生成Agent、完成配置。人格设定是核心，支持4种方式：名称称呼、定制人格（SOUL 16种+IDENTITY 6种+AGENTS 5种+USER 13种）、随机人格、预设人格库（297种角色）。
 ---
 
