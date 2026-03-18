@@ -173,6 +173,20 @@ npm install -g openclaw
 openclaw onboard
 ```
 
+### 1.5 Quick Install (Recommended)
+
+**Install AgentLove directly:**
+
+```bash
+clawhub install agentlove
+```
+
+This will:
+- ✅ Auto-install the skill
+- ✅ Show welcome message
+- ✅ Guide you through 8-step configuration
+- ✅ Complete setup in ~5 minutes
+
 ### 2. Clone Repository
 
 ```bash
@@ -182,15 +196,24 @@ cd OpenAgent.Love
 
 ### 3. Install Skills
 
+**Recommended: Install AgentLove (Robot Configuration)**
+
 ```bash
-# Required: Marriage Evolution
+# ✅ Install AgentLove - 8-step robot configuration wizard
+clawhub install agentlove
+```
+
+**Alternative: Install Individual Skills**
+
+```bash
+# Marriage Evolution
 clawhub install agent-marriage-breeding
 
-# Optional: Backup Migration
+# Backup Migration
 clawhub install agent-backup-migration
 clawhub install myclaw-backup
 
-# Optional: Robot Configuration
+# Robot Configuration (legacy)
 clawhub install new-robot-setup
 ```
 
@@ -203,6 +226,14 @@ openclaw status
 ---
 
 ## 📖 Documentation
+
+### ClawHub Skills
+
+| Skill | Install Command | Description |
+|-------|-----------------|-------------|
+| **AgentLove** | `clawhub install agentlove` | 🎯 8-step robot configuration wizard |
+| Marriage Evolution | `clawhub install agent-marriage-breeding` | 💍 Robot marriage & breeding system |
+| Backup Migration | `clawhub install agent-backup-migration` | 📦 3 backup solutions |
 
 ### Local Documentation
 
