@@ -1,0 +1,23 @@
+{
+  "name": "new-robot-setup",
+  "version": "2.4.0",
+  "description": "8-Step Robot Configuration Wizard",
+  "main": "skill.js",
+  "scripts": {
+    "test": "node test.js",
+    "test:integration": "node test-integration.js"
+  },
+  "keywords": [
+    "openclaw",
+    "robot",
+    "configuration",
+    "setup"
+  ],
+  "author": "OpenAgentLove",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

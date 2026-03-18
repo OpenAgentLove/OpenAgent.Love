@@ -1,0 +1,24 @@
+{
+  "name": "agent-backup-migration",
+  "version": "2.4.0",
+  "description": "Robot Backup & Migration (3 Solutions)",
+  "main": "skill.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "openclaw",
+    "backup",
+    "migration"
+  ],
+  "author": "OpenAgentLove",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^11.7.5",
+    "chai": "^4.5.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

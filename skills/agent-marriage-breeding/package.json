@@ -1,11 +1,36 @@
 {
+  "name": "agent-marriage-breeding",
+  "version": "2.3.0",
+  "description": "AI Robot Marriage & Evolution System",
+  "main": "core.js",
+  "scripts": {
+    "test": "./run-tests.sh",
+    "test:coverage": "./run-tests.sh --coverage",
+    "test:watch": "./run-tests.sh --watch",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint **/*.js --fix",
+    "db:generate-key": "node scripts/generate-key.js",
+    "db:migrate-encryption": "node scripts/migrate-encryption.js",
+    "db:check-encryption": "node scripts/migrate-encryption.js --check"
+  },
+  "keywords": [
+    "openclaw",
+    "marriage",
+    "evolution",
+    "genetic-algorithm"
+  ],
+  "author": "OpenAgentLove",
+  "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "^11.8.1",
     "better-sqlite3-multiple-ciphers": "^12.6.2"
   },
-  "scripts": {
-    "generate-key": "node scripts/generate-key.js",
-    "migrate-encryption": "node scripts/migrate-encryption.js",
-    "check-encryption": "node scripts/migrate-encryption.js --check",
-    "test-encryption": "node scripts/test-encryption.js"
+  "devDependencies": {
+    "mocha": "^11.7.5",
+    "chai": "^4.5.0",
+    "nyc": "^15.1.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }

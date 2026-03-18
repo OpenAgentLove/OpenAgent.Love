@@ -1,22 +1,12 @@
 {
   "name": "openagent-love",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "AI Agent Evolution System - Backup, Configuration, Marriage",
   "scripts": {
-    "audit": "npm audit --audit-level=moderate",
+    "audit": "npm audit",
     "audit:fix": "npm audit fix",
-    "test": "cd skills/agent-marriage-breeding && ./run-tests.sh",
-    "test:coverage": "cd skills/agent-marriage-breeding && ./run-tests.sh --coverage",
-    "test:watch": "cd skills/agent-marriage-breeding && ./run-tests.sh --watch",
-    "lint": "eslint skills/agent-marriage-breeding/**/*.js",
-    "lint:fix": "eslint skills/agent-marriage-breeding/**/*.js --fix",
-    "build": "echo \"Building...\"",
-    "docker:build": "docker build -t openagent-love .",
-    "docker:run": "docker-compose up -d",
-    
-    "db:generate-key": "cd skills/agent-marriage-breeding && node scripts/generate-key.js",
-    "db:migrate-encryption": "cd skills/agent-marriage-breeding && node scripts/migrate-encryption.js",
-    "db:check-encryption": "cd skills/agent-marriage-breeding && node scripts/migrate-encryption.js --check"
+    "test": "echo \"Tests are in skill directories\"",
+    "rebuild": "npm rebuild"
   },
   "keywords": [
     "openclaw",
@@ -31,13 +21,15 @@
     "type": "git",
     "url": "https://github.com/OpenAgentLove/OpenAgent.Love.git"
   },
-  "devDependencies": {
-    "mocha": "^10.2.0",
-    "chai": "^4.3.7",
-    "eslint": "^8.56.0",
-    "nyc": "^15.1.0"
-  },
   "dependencies": {
-    "better-sqlite3": "^9.2.2"
+    "better-sqlite3": "^11.8.1"
+  },
+  "devDependencies": {
+    "eslint": "^10.0.3",
+    "glob": "^13.0.6",
+    "rimraf": "^6.1.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }
