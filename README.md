@@ -49,9 +49,9 @@ This system includes **three core modules** covering the complete robot lifecycl
 
 ```mermaid
 graph LR
-    A[Agent Evolution] --> B[2.1 Backup Migration]
-    A --> C[2.2 Robot Configuration]
-    A --> D[2.3 Marriage Evolution]
+    A[Agent Evolution] --> B[Backup Migration Guide]
+    A --> C[Robot Configuration Guide]
+    A --> D[Marriage Evolution Guide]
     
     B --> B1[Local Copy]
     B --> B2[SSH Clone]
@@ -84,7 +84,7 @@ graph LR
 - [`myclaw-backup`](./skills/myclaw-backup/) - Complete backup with HTTP server ⭐ REFACTORED
 - [`openclaw-backup`](./skills/openclaw-backup/) - Lightweight backup management ⭐ REFACTORED
 
-📖 **Docs**: [2.1 Backup Migration](./memory/agent-backup-migration.md)
+📖 **Docs**: [Backup Migration Guide](./memory/agent-backup-migration.md)
 
 ---
 
@@ -114,7 +114,7 @@ graph LR
 - [`easy-openclaw`](./skills/easy-openclaw/) - 4-round config wizard ⭐ REFACTORED
 - [`presets`](./skills/presets/) - 297 personality presets
 
-📖 **Docs**: [2.2 Robot Configuration](./memory/2.2-new-robot-dialogue.md)
+📖 **Docs**: [Robot Configuration Guide](./memory/2.2-new-robot-dialogue.md)
 
 ---
 
@@ -152,13 +152,13 @@ Marriage → Dating → Compatibility → Ceremony → Inheritance
 | ✨ **Mutation** | Random new skills | 20% | Sudden music talent |
 | 💪 **Boost** | Skill level up | 10% | Coding Lv.1 → Lv.2 |
 
-📖 **Docs**: [2.3 Marriage Evolution](./memory/2.3-marriage-breeding-dialogue.md)
+📖 **Docs**: [Marriage Evolution Guide](./memory/2.3-marriage-breeding-dialogue.md)
 
 ---
 
 ## 🚀 Quick Start
 
-> ⚡ **5 分钟快速上手**：查看 [QUICKSTART.md](./QUICKSTART.md) 完成第一次结婚体验！
+> ⚡ **5-Minute Quick Start**: Check [QUICKSTART.md](./QUICKSTART.md) to complete your first marriage experience!
 
 ### Prerequisites
 
@@ -389,21 +389,19 @@ MIT License - See [LICENSE](./LICENSE)
 
 ## 🔒 安全
 
-### 依赖审计
-
 ```bash
-# 运行安全审计
+# Run security audit
 npm run audit
 
-# 自动修复
+# Auto-fix
 npm run audit:fix
 ```
 
 ### GitHub Actions
 
-- 每次推送自动运行 npm audit
-- 每周定期安全扫描
-- 审计报告自动上传
+- Auto npm audit on every push
+- Weekly security scans
+- Audit reports auto-upload
 
 ---
 
