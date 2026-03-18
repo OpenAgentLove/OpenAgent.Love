@@ -1,25 +1,20 @@
 /**
- * 对话状态管理器
- * 用于管理 new-robot-setup 技能的对话状态，支持回退、保存、加载等功能
+ * 对话状态管理器（内存版 - 安全）
+ * 用于管理 agentlove 技能的对话状态，支持回退、保存、加载等功能
+ * 
+ * 安全特性：
+ * - 所有数据存储在内存中，会话结束即清除
+ * - 不写入任何文件
+ * - 不收集敏感凭证
  */
-
-const fs = require('fs');
-const path = require('path');
 
 class StateManager {
   /**
    * 构造函数
-   * @param {string} statePath - 状态文件存储路径
    */
-  constructor(statePath = './data/setup-states') {
-    // 解析路径（相对于技能目录）
-    const skillDir = __dirname;
-    this.statePath = path.join(skillDir, statePath);
-    
-    // 确保目录存在
-    if (!fs.existsSync(this.statePath)) {
-      fs.mkdirSync(this.statePath, { recursive: true });
-    }
+  constructor() {
+    this.states = new Map(); // 内存存储
+    // ❌ 不再使用文件系统
   }
   
   /**
@@ -47,28 +42,22 @@ class StateManager {
   }
   
   /**
-   * 保存状态
+   * 保存状态（内存）
    * @param {string} userId - 用户 ID
    * @param {object} state - 状态对象
    */
   saveState(userId, state) {
-    const filePath = path.join(this.statePath, `${userId}.json`);
-    state.updated_at = Date.now();
-    fs.writeFileSync(filePath, JSON.stringify(state, null, 2), 'utf-8');
+    this.states.set(userId, state);
+    // ✅ 内存存储，不写文件
   }
   
   /**
-   * 加载状态
+   * 加载状态（内存）
    * @param {string} userId - 用户 ID
    * @returns {object|null} - 状态对象，不存在则返回 null
    */
   loadState(userId) {
-    const filePath = path.join(this.statePath, `${userId}.json`);
-    if (fs.existsSync(filePath)) {
-      const content = fs.readFileSync(filePath, 'utf-8');
-      return JSON.parse(content);
-    }
-    return null;
+    return this.states.get(userId) || null;
   }
   
   /**
@@ -94,8 +83,42 @@ class StateManager {
   updateStep(userId, step) {
     const state = this.getOrCreateState(userId);
     state.current_step = step;
+    state.updated_at = Date.now();
     this.saveState(userId, state);
     return state;
+  }
+  
+  /**
+   * 回退到上一步
+   * @param {string} userId - 用户 ID
+   * @returns {object|null} - 更新后的状态，无法回退则返回 null
+   */
+  goBack(userId) {
+    const state = this.getOrCreateState(userId);
+    if (state.current_step > 0) {
+      state.current_step--;
+      state.updated_at = Date.now();
+      this.saveState(userId, state);
+      return state;
+    }
+    return null;
+  }
+  
+  /**
+   * 前进到下一步
+   * @param {string} userId - 用户 ID
+   * @returns {object|null} - 更新后的状态，无法前进则返回 null
+   */
+  goNext(userId) {
+    const state = this.getOrCreateState(userId);
+    // 最多到第 10 步（完成配置）
+    if (state.current_step < 10) {
+      state.current_step++;
+      state.updated_at = Date.now();
+      this.saveState(userId, state);
+      return state;
+    }
+    return null;
   }
   
   /**
@@ -103,16 +126,15 @@ class StateManager {
    * @param {string} userId - 用户 ID
    * @param {number} step - 步骤编号
    * @param {object} data - 步骤数据
-   * @returns {object} - 更新后的状态
    */
   saveStepData(userId, step, data) {
     const state = this.getOrCreateState(userId);
-    state.step_data[`step_${step}`] = {
+    state.step_data[step] = {
       ...data,
-      completed_at: Date.now()
+      saved_at: Date.now()
     };
+    state.updated_at = Date.now();
     this.saveState(userId, state);
-    return state;
   }
   
   /**
@@ -123,132 +145,54 @@ class StateManager {
    */
   getStepData(userId, step) {
     const state = this.loadState(userId);
-    if (state && state.step_data[`step_${step}`]) {
-      return state.step_data[`step_${step}`];
+    if (state && state.step_data && state.step_data[step]) {
+      return state.step_data[step];
     }
     return null;
   }
   
   /**
-   * 回退到上一步
+   * 获取当前选择
    * @param {string} userId - 用户 ID
-   * @returns {object} - 结果对象 {success: boolean, step?: number, message?: string}
+   * @returns {object|null} - 当前选择的数据
    */
-  goBack(userId) {
+  getCurrentSelection(userId) {
     const state = this.loadState(userId);
-    if (!state) {
-      return { 
-        success: false, 
-        message: '未找到会话状态，请重新开始' 
-      };
+    if (state && state.step_data && state.step_data.selection) {
+      return state.step_data.selection;
     }
-    
-    if (state.current_step > 0) {
-      state.current_step--;
-      this.saveState(userId, state);
-      return { 
-        success: true, 
-        step: state.current_step,
-        message: `已返回到第 ${state.current_step} 步`
-      };
-    }
-    
-    return { 
-      success: false, 
-      message: '已经是第一步，无法回退' 
-    };
+    return null;
   }
   
   /**
-   * 前进到下一步
+   * 保存当前选择
    * @param {string} userId - 用户 ID
-   * @returns {object} - 结果对象 {success: boolean, step?: number, message?: string}
+   * @param {object} selection - 选择的数据
    */
-  goNext(userId) {
-    const state = this.loadState(userId);
-    if (!state) {
-      return { 
-        success: false, 
-        message: '未找到会话状态，请重新开始' 
-      };
-    }
-    
-    // 总共 10 步（0-10）
-    if (state.current_step < 10) {
-      state.current_step++;
-      this.saveState(userId, state);
-      return { 
-        success: true, 
-        step: state.current_step,
-        message: `已进入第 ${state.current_step} 步`
-      };
-    }
-    
-    return { 
-      success: false, 
-      message: '已经是最后一步' 
-    };
+  saveSelection(userId, selection) {
+    this.saveStepData(userId, 'selection', selection);
   }
   
   /**
-   * 清除状态
+   * 清除状态（会话结束）
    * @param {string} userId - 用户 ID
-   * @returns {boolean} - 是否成功清除
    */
   clearState(userId) {
-    const filePath = path.join(this.statePath, `${userId}.json`);
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-      return true;
-    }
-    return false;
+    this.states.delete(userId);
+    // ✅ 内存清除，无需删除文件
   }
   
   /**
-   * 获取所有活跃会话
-   * @returns {array} - 会话列表
+   * 获取状态摘要（用于日志）
+   * @param {string} userId - 用户 ID
+   * @returns {string} - 状态摘要
    */
-  getAllSessions() {
-    const sessions = [];
-    if (fs.existsSync(this.statePath)) {
-      const files = fs.readdirSync(this.statePath);
-      for (const file of files) {
-        if (file.endsWith('.json')) {
-          const userId = file.replace('.json', '');
-          const state = this.loadState(userId);
-          if (state) {
-            sessions.push({
-              userId,
-              sessionId: state.session_id,
-              currentStep: state.current_step,
-              createdAt: state.created_at,
-              updatedAt: state.updated_at
-            });
-          }
-        }
-      }
+  getStateSummary(userId) {
+    const state = this.loadState(userId);
+    if (state) {
+      return `用户${userId} - 步骤${state.current_step}/10 - 会话${state.session_id}`;
     }
-    return sessions;
-  }
-  
-  /**
-   * 清理过期会话（超过 24 小时未更新）
-   * @param {number} expireHours - 过期时间（小时）
-   * @returns {number} - 清理的会话数量
-   */
-  cleanupExpiredSessions(expireHours = 24) {
-    const expireTime = Date.now() - (expireHours * 60 * 60 * 1000);
-    let count = 0;
-    
-    const sessions = this.getAllSessions();
-    for (const session of sessions) {
-      if (session.updatedAt < expireTime) {
-        this.clearState(session.userId);
-        count++;
-      }
-    }
-    
-    return count;
+    return `用户${userId} - 无状态`;
   }
 }
 
