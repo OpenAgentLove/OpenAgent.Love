@@ -2,7 +2,7 @@
   "name": "agentlove",
   "version": "1.0.0",
   "description": "新生机器人一键配置系统 - 8 步完成机器人配置",
-  "author": "OpenAgentLove",
+  "author": "OpenAgentLove Team",
   "license": "MIT",
   "keywords": [
     "openclaw",
@@ -28,5 +28,7 @@
       "/setup-robot",
       "/create-agent"
     ]
-  }
+  },
+  "repository": "https://github.com/OpenAgentLove/OpenAgent.Love",
+  "homepage": "https://openagent.love"
 }
