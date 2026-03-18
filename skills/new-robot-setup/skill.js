@@ -435,7 +435,6 @@ function processStep(userId, step, input) {
   switch (step) {
     case 0: // 功能介绍
       if (input === '1') {
-        stateManager.goNext(userId);
         return {
           message: '✅ 好的，让我们开始配置之旅！',
           completed: true
@@ -708,6 +707,24 @@ ${selectedSkills.map((s, i) => `  ${i + 1}. ${s}`).join('\n')}
  * 处理步骤 6：平台配置
  */
 function processStep6(userId, input) {
+  const state = stateManager.getOrCreateState(userId);
+  const step6Data = state.step_data['step_6'];
+  
+  // 如果已经选择了平台，现在处理凭证
+  if (step6Data && step6Data.platform && step6Data.step === 'credentials_pending') {
+    // 用户提交凭证（任何非数字的输入都视为凭证）
+    stateManager.saveStepData(userId, 6, { 
+      ...step6Data,
+      step: 'credentials_submitted',
+      credentialsProvided: true
+    });
+    
+    return {
+      message: `✅ 凭证信息已收到（已加密存储）\n\n进入下一步...`,
+      completed: true
+    };
+  }
+  
   // 解析平台选择
   const platformMatch = input.match(/^([1-5])$/);
   

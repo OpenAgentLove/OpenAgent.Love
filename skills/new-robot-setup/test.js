@@ -35,7 +35,7 @@ try {
   
   assert(state.session_id, '应该有 session_id');
   assert(state.user_id === testUserId, 'user_id 应该匹配');
-  assert(state.current_step === 1, '初始步骤应该是 1');
+  assert(state.current_step === 0, '初始步骤应该是 0（从功能介绍开始）');
   assert(state.step_data, '应该有 step_data');
   assert(state.created_at, '应该有 created_at');
   assert(state.updated_at, '应该有 updated_at');
@@ -87,16 +87,16 @@ try {
   assert(result2.success === true, '再次回退应该成功');
   assert(result2.step === 3, '应该回退到第 3 步');
   
-  // 回退到第 1 步后继续回退
-  stateManager.updateStep(testUserId, 1);
+  // 回退到第 0 步后继续回退
+  stateManager.updateStep(testUserId, 0);
   const result3 = stateManager.goBack(testUserId);
-  assert(result3.success === false, '第 1 步回退应该失败');
+  assert(result3.success === false, '第 0 步回退应该失败');
   assert(result3.message, '应该有错误消息');
   
   console.log('✅ 回退功能测试成功');
   console.log('   从第 5 步回退到第 4 步：成功');
   console.log('   从第 4 步回退到第 3 步：成功');
-  console.log('   从第 1 步回退：正确失败\n');
+  console.log('   从第 0 步回退：正确失败\n');
 } catch (error) {
   console.log('❌ 回退功能测试失败:', error.message, '\n');
 }
@@ -112,10 +112,10 @@ try {
   
   const result1 = stateManager.goNext(testUserId);
   assert(result1.success === true, '前进应该成功');
-  assert(result1.step === 2, '应该前进到第 2 步');
+  assert(result1.step === 1, '应该前进到第 1 步');
   
-  // 前进到第 10 步
-  for (let i = 0; i < 8; i++) {
+  // 前进到第 10 步（从 0 开始，需要前进 10 次）
+  for (let i = 0; i < 9; i++) {
     stateManager.goNext(testUserId);
   }
   
