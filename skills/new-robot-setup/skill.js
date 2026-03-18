@@ -11,7 +11,29 @@
  */
 
 const StateManager = require('./state-manager');
-const { sanitizeLog, sanitizeObject } = require('../utils/logger');
+// 简单的日志清理函数（移除外部依赖）
+function sanitizeLog(log) {
+  if (typeof log === 'string') {
+    return log.replace(/(api[_-]?key|token|secret|password|passphrase|credential)[s]?\s*[:=]\s*['"]?([a-zA-Z0-9_\-]{16,})['"]?/gi, '$1: ***REDACTED***');
+  }
+  return log;
+}
+
+function sanitizeObject(obj) {
+  if (typeof obj !== 'object' || obj === null) return obj;
+  const sensitiveKeys = ['apiKey', 'api_key', 'token', 'secret', 'password', 'passphrase', 'credential'];
+  const result = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (sensitiveKeys.some(k => key.toLowerCase().includes(k))) {
+      result[key] = '***REDACTED***';
+    } else if (typeof value === 'object' && value !== null) {
+      result[key] = sanitizeObject(value);
+    } else {
+      result[key] = value;
+    }
+  }
+  return result;
+}
 const fs = require('fs');
 const path = require('path');
 
