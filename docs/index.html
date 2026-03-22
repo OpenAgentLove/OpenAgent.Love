@@ -474,39 +474,28 @@
         </div>
     </section>
 
-    <!-- Code Section -->
+    <!-- Quick Start Section -->
     <section class="code-section" id="demo">
         <div class="code-container">
             <h2>🚀 Quick Start</h2>
+            <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9;">Get started in 3 simple steps</p>
+            
             <div class="code-block">
-<span class="comment"># Install OpenClaw</span>
+<span class="comment"># Step 1: Install OpenClaw</span>
 npm install -g openclaw
 openclaw onboard
 
-<span class="comment"># Clone Repository</span>
-git clone https://github.com/OpenAgentLove/OpenAgent.Love.git
-cd OpenAgent.Love
+<span class="comment"># Step 2: Install AgentLove Skill</span>
+clawhub install agentlove
 
-<span class="comment"># Quick Start (5 min)</span>
-cat QUICKSTART.md
-./demo.sh  <span class="comment"># Auto-demo script</span>
-
-<span class="comment"># Install Core Skills</span>
-clawhub install agent-marriage-breeding
-clawhub install agent-backup-migration
-clawhub install new-robot-setup
-
-<span class="comment"># Enable Security (Production)</span>
-npm run db:generate-key
-export DATABASE_ENCRYPTION_KEY=$(cat ./data/.db_key)
-npm run db:migrate-encryption
-
-<span class="comment"># Verify Installation</span>
-openclaw status
+<span class="comment"># Step 3: Start Configuration</span>
+Say: "创建机器人" or "/agentlove"
             </div>
-            <p style="text-align: center; margin-top: 1.5rem;">
-                <a href="/OpenAgent.Love/QUICKSTART.md" style="color: var(--primary); font-weight: 600;">📖 Read Full Quick Start Guide →</a>
-            </p>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="margin-bottom: 1rem; opacity: 0.9;">📦 Latest: v2.9.6 · ✅ 11/11 Tests · 🔒 100/100 Security</p>
+                <a href="/OpenAgent.Love/QUICKSTART.md" style="color: var(--primary); font-weight: 600; font-size: 1rem;">📖 Read Full Guide (5 min) →</a>
+            </div>
         </div>
     </section>
 
@@ -519,8 +508,7 @@ openclaw status
         </p>
         <div class="cta-buttons">
             <a href="https://github.com/OpenAgentLove/OpenAgent.Love" class="btn btn-primary">🚀 Get Started</a>
-            <a href="QUICKSTART.md" class="btn btn-secondary">📖 Quick Start (5 min)</a>
-            <a href="/OpenAgent.Love/skills-catalog.md" class="btn btn-secondary">🧩 View 347 Skills</a>
+            <a href="/OpenAgent.Love/skills-catalog.md" class="btn btn-secondary">🧩 View Skills</a>
         </div>
     </section>
 
