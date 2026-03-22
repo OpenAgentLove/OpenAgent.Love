@@ -480,21 +480,56 @@
             <h2>🚀 Quick Start</h2>
             <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9;">Get started in 3 simple steps</p>
             
-            <div class="code-block">
-<span class="comment"># Step 1: Install OpenClaw</span>
-npm install -g openclaw
-openclaw onboard
-
-<span class="comment"># Step 2: Install AgentLove Skill</span>
-clawhub install agentlove
-
-<span class="comment"># Step 3: Start Configuration</span>
-Say: "创建机器人" or "/agentlove"
+            <!-- Step Cards -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <!-- Step 1 -->
+                <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <span style="background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">1</span>
+                        <h3 style="margin: 0; font-size: 1.1rem;">Install OpenClaw</h3>
+                    </div>
+                    <div class="code-block" style="margin: 0;">
+                        <code>npm install -g openclaw</code><br>
+                        <code>openclaw onboard</code>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <span style="background: var(--accent); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">2</span>
+                        <h3 style="margin: 0; font-size: 1.1rem;">Install AgentLove</h3>
+                    </div>
+                    <div class="code-block" style="margin: 0;">
+                        <code>clawhub install agentlove</code>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <span style="background: #4CAF50; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem;">3</span>
+                        <h3 style="margin: 0; font-size: 1.1rem;">Start Configuration</h3>
+                    </div>
+                    <div class="code-block" style="margin: 0;">
+                        <code>Say: "创建机器人"</code><br>
+                        <code>or "/agentlove"</code>
+                    </div>
+                </div>
             </div>
             
-            <div style="text-align: center; margin-top: 2rem;">
-                <p style="margin-bottom: 1rem; opacity: 0.9;">📦 Latest: v2.9.6 · ✅ 11/11 Tests · 🔒 100/100 Security</p>
-                <a href="/OpenAgent.Love/QUICKSTART.md" style="color: var(--primary); font-weight: 600; font-size: 1rem;">📖 Read Full Guide (5 min) →</a>
+            <!-- Info Bar -->
+            <div style="background: rgba(76, 175, 80, 0.15); padding: 1rem; border-radius: 8px; border-left: 4px solid #4CAF50; margin: 2rem 0;">
+                <p style="margin: 0; text-align: center; opacity: 0.95;">
+                    📦 <strong>v2.9.6</strong> &nbsp;|&nbsp; 
+                    ✅ <strong>11/11 Tests Passed</strong> &nbsp;|&nbsp; 
+                    🔒 <strong>Security: 100/100</strong>
+                </p>
+            </div>
+            
+            <!-- Full Guide Link -->
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="/OpenAgent.Love/QUICKSTART.md" style="color: var(--primary); font-weight: 600; font-size: 1rem;">📖 Read Full Quick Start Guide (5 min) →</a>
             </div>
         </div>
     </section>
