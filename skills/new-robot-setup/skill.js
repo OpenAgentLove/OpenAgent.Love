@@ -717,10 +717,16 @@ ${selectedSkills.map((s, i) => `  ${i + 1}. ${s}`).join('\n')}
  */
 function processStep6(userId, input) {
   const state = stateManager.getOrCreateState(userId);
-  const step6Data = state.step_data['step_6'];
   
   // 检查用户是否说"已完成"（表示已在控制台配置好凭证）
   if (input.includes('已完成') || input.includes('配置完成') || input === 'done') {
+    const step6Data = state.step_data['step_6'];
+    if (!step6Data || !step6Data.platforms) {
+      return {
+        message: '⚠️ 请先选择平台，回复编号（如：1 或 1,2,3）',
+        completed: false
+      };
+    }
     return {
       message: `✅ 平台配置确认\n\n进入下一步...`,
       completed: true
@@ -878,7 +884,7 @@ function processStep10(userId, input) {
     name: state.step_data['step_7']?.name || '未设置',
     personality: state.step_data['step_7']?.nameType || '未设置',
     skills: state.step_data['step_5']?.skills?.length || 0,
-    platform: state.step_data['step_6']?.platformName || '未设置',
+    platform: state.step_data['step_6']?.platformNames?.join('、') || '未设置',
     mode: state.step_data['step_9']?.mode === 'independent' ? '独立模式' : '子 Agent 模式'
   };
   
@@ -921,5 +927,7 @@ module.exports = {
   handleInput,
   getStepPrompt,
   WELCOME_CARD,
-  STEPS
+  STEPS,
+  sanitizeLog,
+  sanitizeObject
 };
