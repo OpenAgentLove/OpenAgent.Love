@@ -1,7 +1,7 @@
 {
   "name": "agentlove",
-  "version": "1.0.0",
-  "description": "新生机器人一键配置系统 - 8 步完成机器人配置",
+  "version": "2.9.3",
+  "description": "AgentLove - AI 机器人一键配置（8 步完成）。提供备份迁移、机器人配置、结婚进化三大核心功能。",
   "author": "OpenAgentLove Team",
   "license": "MIT",
   "keywords": [

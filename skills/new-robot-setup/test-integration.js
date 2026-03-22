@@ -73,9 +73,10 @@ response = handleInput(testUserId2, '1');
 assert(response.includes('飞书'), '应该选择飞书平台');
 console.log('✅ 第 6 步测试通过\n');
 
-// 提供凭证信息
-response = handleInput(testUserId2, 'AppID: test123, Secret: test456');
-console.log('✅ 凭证信息已提交\n');
+// 用户确认已在控制台配置凭证
+response = handleInput(testUserId2, '已完成');
+assert(response.includes('进入下一步') || response.includes('配置确认'), '应该确认配置完成');
+console.log('✅ 凭证配置确认通过\n');
 
 // 测试第 7 步：人格设定
 console.log('测试第 7 步：人格设定');
