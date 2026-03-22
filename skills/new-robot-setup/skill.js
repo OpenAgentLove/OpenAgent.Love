@@ -882,10 +882,7 @@ function processStep10(userId, input) {
   
   const summary = {
     name: state.step_data['step_7']?.name || '未设置',
-    personality: state.step_data['step_7']?.nameType === 'custom' ? '自定义' : 
-               state.step_data['step_7']?.nameType === 'random_cn' ? '随机中文' :
-               state.step_data['step_7']?.nameType === 'random_en' ? '随机英文' :
-               state.step_data['step_7']?.nameType || '未设置',
+    personality: state.step_data['step_7']?.nameType || '未设置',
     skills: state.step_data['step_5']?.skills?.length || 0,
     platform: state.step_data['step_6']?.platformNames?.join('、') || '未设置',
     mode: state.step_data['step_9']?.mode === 'independent' ? '独立模式' : '子 Agent 模式'
