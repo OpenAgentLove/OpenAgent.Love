@@ -1,6 +1,6 @@
 {
   "name": "agentlove",
-  "version": "2.9.3",
+  "version": "2.9.4",
   "description": "AgentLove - AI Robot One-Click Configuration (8 Steps). Includes backup migration, robot configuration, and marriage evolution.",
   "main": "skill.js",
   "scripts": {
