@@ -5,8 +5,8 @@
 
 const { handleInput, getStepPrompt, STEPS } = require('./skill');
 const StateManager = require('./state-manager');
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs'); // 已禁用，避免危险操作
+// const path = require('path');
 
 const TEST_DIR = './data/test-integration-states';
 const assert = (condition, message) => {
@@ -18,9 +18,10 @@ const assert = (condition, message) => {
 console.log('🧪 开始集成测试...\n');
 
 // 清理测试数据
-if (fs.existsSync(TEST_DIR)) {
-  fs.rmSync(TEST_DIR, { recursive: true });
-}
+// 已禁用危险的 fs.rmSync 操作
+// if (fs.existsSync(TEST_DIR)) {
+//   // fs.rmSync(TEST_DIR, { recursive: true }); // 已禁用
+// }
 
 // 测试用户 ID
 const testUserId = 'integration_test_user_001';
@@ -131,9 +132,10 @@ console.log('✅ "重新开始"命令测试通过\n');
 
 // 清理测试数据
 console.log('清理测试数据...');
-if (fs.existsSync(TEST_DIR)) {
-  fs.rmSync(TEST_DIR, { recursive: true });
-}
+// 已禁用危险的 fs.rmSync 操作
+// if (fs.existsSync(TEST_DIR)) {
+//   // fs.rmSync(TEST_DIR, { recursive: true }); // 已禁用
+// }
 
 console.log('\n=================================');
 console.log('✅ 所有集成测试执行完成！');

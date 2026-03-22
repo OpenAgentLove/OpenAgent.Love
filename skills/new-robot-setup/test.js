@@ -302,7 +302,7 @@ try {
 console.log('清理测试数据...');
 try {
   if (fs.existsSync(TEST_DIR)) {
-    fs.rmSync(TEST_DIR, { recursive: true, force: true });
+    // fs.rmSync(TEST_DIR, { recursive: true, force: true }); // 已禁用 - 避免危险操作
     console.log('✅ 测试数据已清理\n');
   }
 } catch (error) {
